@@ -1,0 +1,28 @@
+input[type = "checkbox"]{
+    display: none;
+    width: 100%;
+
+}
+#diamond{
+    background-color: rgb(211, 50, 130);
+    color: #fff;
+}
+#platinum{
+    background-color: #63adb3;
+    color: white;
+}
+#gold{
+    background-color: #ffd900;
+}
+#silver{
+    background-color: #c0c0c0;
+}
+#bronze{
+    background-color: #bd5e00;
+    color: white;
+}
+#badge{
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #ccc;
+    color: black;
+}
