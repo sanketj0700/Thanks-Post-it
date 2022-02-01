@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import '../styles/Card.css';
-import CardModal from './CardModal';
+import EditorModal from './EditorModal';
+import ReaderModal from './ReaderModal';
 function Card() {
     const [open, setOpen] = useState(false);
 
@@ -9,7 +10,7 @@ function Card() {
     }
   return (
     <>
-    <CardModal open = {open} setOpen = {setOpen}/>
+    <ReaderModal open = {open} setOpen = {setOpen}/>
     <div className='card-container' onClick={handleOnClick}>
       
       <div className = 'card-header'>
@@ -26,7 +27,8 @@ function Card() {
           <li>Badge 1</li>
           <li>Badge 2</li>
           <li>Badge 3</li>
-
+          <li>Badge 4</li>
+          <li>Badge 5</li>
       </ul>
      </div>
   </div>
