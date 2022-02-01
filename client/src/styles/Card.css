@@ -32,7 +32,9 @@
     padding: 0.5em;
     justify-content: space-between;
     align-items: center;
-
+}
+.card-title{
+    margin-right: 1em;
 }
 .card-title{
     font-size: 2rem;
@@ -48,6 +50,21 @@
     margin-left: 1em;
     margin-right: 1em;
     height: 50%;
+}
+.short-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+.read-more{
+    color: rgb(173, 17, 173);
+    margin-top: 1em;
+}
+.dedicated-to{
+    font-size: 1.2em;
+    margin-top: 2em;
+
 }
 .card-footer{
     display: flex;
