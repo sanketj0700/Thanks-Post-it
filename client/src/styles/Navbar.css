@@ -22,6 +22,12 @@
     list-style: none;
     margin-right: 2rem;
 }
+
+.AddButton{
+    border: none;
+    background: none;
+}
+
 @media (max-width : 1024px){
     .nav-items{
         width: 20%;
