@@ -1,11 +1,36 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "./app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "cross-env NODE_ENV=development nodemon app"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Thanks-Post-it",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanketj0700/Thanks-Post-it.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sanketj0700/Thanks-Post-it/issues"
+  },
+  "homepage": "https://github.com/sanketj0700/Thanks-Post-it#readme",
+  "description": "",
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^15.0.0",
+    "express": "^4.17.2",
+    "express-jwt": "^6.1.0",
+    "express-openid-connect": "^2.6.0",
+    "google-auth-library": "^7.11.0",
+    "jwks-rsa": "^2.0.5",
+    "mongoose": "^6.1.9",
+    "morgan": "^1.10.0"
+  }
 }

@@ -1,3 +1,4 @@
+import {useState} from  'react';
 import Home from './components/Home';
 import Profile from './components/Profile';
 import Navbar from './components/Navbar';
@@ -9,10 +10,13 @@ import './styles/App.css';
 
 import SearchBar from './components/SearchBar';
 function App() {
+
+  const [user, setUser] = useState('Karan');
   return (
       <div className="App">
         <BrowserRouter>
         <Navbar />
+        <Home user = {user}/>
         <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="/profile" exact element={<Profile />} />
@@ -20,7 +24,7 @@ function App() {
             <Route path="/mentionedme" exact element={<MentionedMe />} />
         </Routes>
         </BrowserRouter>
-      </div>
+    </div>
   );
 }
 
