@@ -5,14 +5,13 @@ const UserSchema =  new Schema({
     email : {
         type: String,
         trim: true,
+        required : true,
+        unique : true,
     },
     fullName : {
         type: String,
-        trim: true
-    },
-    role: {
-        type: String,
         trim: true,
+        required : true,
     },
     sessionToken : {
         type: [String],
@@ -22,10 +21,14 @@ const UserSchema =  new Schema({
         tpye : Map,
         of : Number
     },
-    stared :{
+    starred :{
         type : [mongoose.Schema.Types.ObjectId],
         ref : 'Message',
     },
+    profilePicture : {
+        type : String,
+        trim : true,
+    }
 })
 
 const User = mongoose.model('User',UserSchema);
