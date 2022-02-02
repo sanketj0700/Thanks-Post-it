@@ -12,6 +12,27 @@ const messageSchema = new Schema({
         required : true,
         trim : true
     },
+    title : {
+        type : String,
+        required : true,
+        trim : true,
+    },
+    dedicatedTo : [{
+        name : {
+            type : String,
+            trim : true,
+            // required : true,
+        },
+        email : {
+            type : String,
+            trim : true,
+            // required : true,
+        },
+        img : {
+            type : String,
+            trim : true,
+        }
+    }],
     createdAt : {
         type: Date,
         default : Date.now()
