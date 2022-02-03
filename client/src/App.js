@@ -4,7 +4,6 @@ import Profile from './components/Profile';
 import Navbar from './components/Navbar';
 import StarredMessages from './components/StarredMessages';
 import MentionedMe from './components/MentionedMe';
-import LoginButton from './components/LoginButton';
 import Login from './components/Login';
 
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
