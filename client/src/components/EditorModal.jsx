@@ -64,7 +64,6 @@ function EditorModal({open, setOpen, title, text, badges, dedicated, setTitle, s
             </div>
         </DialogContent>
         <DialogActions>
-            {/* <button onClick={handleOnCancel}>Cancel</button> */}
             <button onClick = {handleOnOk} className='modal-button'>Ok</button>
         </DialogActions>
     </Dialog>
