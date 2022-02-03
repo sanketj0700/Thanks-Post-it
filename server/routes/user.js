@@ -6,11 +6,11 @@ const router = express.Router();
 router.post('/',authorizeAccessToken,async(req,res)=>{
     try{
         const payload = JSON.parse(Buffer.from(req.headers.authorization.split(" ")[1].split('.')[1],"base64").toString());
-        const temp = await User.find({email : payload.email});
+        const temp = await User.find({ _id : payload.email});
         if(temp.length === 0){
             const user = new User({
                 fullName : payload.name,
-                email : payload.email,
+                _id : payload.email,
                 profilePicture : payload.picture,
             });
             await user.save();
@@ -34,19 +34,19 @@ router.post('/',authorizeAccessToken,async(req,res)=>{
     }
 });
 
-router.post('/addToStared',authorizeAccessToken,async(req,res)=>{
+router.post('/addToStarred',authorizeAccessToken,async(req,res)=>{
     try{
         const update = {
             $addToSet : {
                 starred : req.body.message_id
             },
         };
-        await User.findByIdAndUpdate({ _id : req.body.id},update,{
+        await User.findByIdAndUpdate({ _id : req.body.email},update,{
             new : true,
         }).then(
             res.send({
                 error: false,
-                msg : "Added to Stared Message!!!!"
+                msg : "Added to Starred Message!!!!"
             })
         )   
     }catch(err){
@@ -58,19 +58,19 @@ router.post('/addToStared',authorizeAccessToken,async(req,res)=>{
     }
 });
 
-router.post('/removeFromStared',async(req,res)=>{
+router.post('/removeFromStarred',authorizeAccessToken,async(req,res)=>{
     try{
         const update = {
             $pull : {
                 starred : req.body.message_id
             },
         };
-        await User.findByIdAndUpdate({ _id : req.body.id},update,{
+        await User.findByIdAndUpdate({ _id : req.body.email},update,{
             new : true,
         }).then(
             res.send({
                 error: false,
-                msg : "Removed from Stared Message!!!!"
+                msg : "Removed from Starred Message!!!!"
             })
         )   
     }catch(err){

@@ -1,5 +1,6 @@
 const express = require('express');
 const Message = require('../models/Message');
+const User = require('../models/User');
 const {authorizeAccessToken} = require('../middleware/auth');
 
 const router = express.Router();
@@ -19,7 +20,8 @@ router.post('/create',authorizeAccessToken,async(req,res)=>{
         res.send({
             error: false,
             msg : message._id
-        })
+        });
+
     }catch(err){
         console.log(err);
         res.send({
@@ -55,7 +57,8 @@ router.patch('/update',authorizeAccessToken,async(req,res)=>{
     try{
         const update = {
             data : req.body.message,
-            title : req.body.title
+            title : req.body.title,
+            dedicatedTo : req.body.dedicatedTo
         };
         const message = await Message.findOneAndUpdate({
             _id : req.body._id
@@ -115,12 +118,12 @@ router.get('/user_id',authorizeAccessToken,async(req,res)=>{
     }
 });
 
-// @desc         Find all the stared messages of the user
-// @route        GET /message/staredMessages
+// @desc         Find all the starred messages of the user
+// @route        GET /message/starredMessages
 
-router.get('/staredMessages',authorizeAccessToken,async(req,res)=>{
+router.get('/starredMessages',authorizeAccessToken,async(req,res)=>{
     try{
-        await Message.find({_id : req.body.stared}).sort({_id : -1}).skip(req.body.skip).limit(10).then(data=>{
+        await Message.find({_id : req.body.starred}).sort({_id : -1}).skip(req.body.skip).limit(10).then(data=>{
             res.send({
                 error: false,
                 msg : data
@@ -140,12 +143,39 @@ router.get('/staredMessages',authorizeAccessToken,async(req,res)=>{
 // @route       GET /message/search
 
 router.get('/search',authorizeAccessToken,async(req,res)=>{
-    await Message.find({ $text : {$search : req.body.query}}).sort({_id : -1}).limit(50).skip(req.body.skip).then(data=>{
+    try{
+        await Message.find({ $text : {$search : req.body.query}}).sort({_id : -1}).limit(50).skip(req.body.skip).then(data=>{
+            res.send({
+                error: false,
+                data,
+            })
+        });
+    }catch(err){
+        console.log(err);
         res.send({
-            error: false,
-            data,
-        })
-    });    
+            error : true,
+            msg : err.message
+        });
+    }  
 });
 
+// @desc        searches for a particular query in search bar
+// @route       GET /message/dedicatedTo
+
+router.get('/dedicatedTo',authorizeAccessToken,async(req,res)=>{
+    try{
+        await Message.find({"dedicatedTo.email" : req.body.email}).sort({_id : -1}).limit(40).skip(req.body.skip).then(data=>{
+            res.send({
+                error : false,
+                data
+            });
+        });
+    }catch(err){
+        console.log(err);
+        res.send({
+            error : true,
+            msg : err.message
+        });
+    }
+});
 module.exports = router;
