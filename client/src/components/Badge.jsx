@@ -11,6 +11,7 @@ function Badge({badge, badges, setBadges}) {
                 if(e.target.checked){
                     setBadges([...badges, badge]);
                     setChecked(true);
+                    
                 }
                 else{
                     setBadges(badges.filter(b=>b!==badge));
