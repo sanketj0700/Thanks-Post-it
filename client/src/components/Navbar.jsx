@@ -1,24 +1,18 @@
-import { getThemeProps } from '@mui/system';
-import React, { Fragment, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import React from 'react';
 import '../styles/Navbar.css';
-import EditorModal from './EditorModal';
-// import { useState } from 'react';
-import Card from './Card'
-import Home from './Home';
 
-
-function Navbar({cardList, setCardlist}) {
-  const [open, setOpen] = useState(false);
-    const handleOnClick = () => {
-        setOpen(true);
-    }
-  return (
-  <>
-  <div className='navbar'>
-      <h2 className='nav-brand'>Thanks Post It</h2> 
+function Navbar() {
+  return <div className='navbar'>
+    <Link to='/' style={{textDecoration: 'none'}}>
+      <h2 className='nav-brand'>
+        Thanks Post It
+      </h2>
+    </Link> 
       <ul className='nav-items'>
-          <li><button class = "AddButton" onClick={handleOnClick}><i class="fas fa-plus"></i></button></li>
-          <li>Profile</li>
+          <li className='profile-item'>
+            <Link className='profile-link-active' to='/profile' style={{textDecoration: 'none',color:'black'}}>Profile</Link>
+          </li>
           <li>Logout</li>
       </ul>
   </div>

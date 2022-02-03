@@ -21,11 +21,7 @@
     justify-content: space-between;
     list-style: none;
     margin-right: 2rem;
-}
-
-.AddButton{
-    border: none;
-    background: none;
+    text-decoration: none;
 }
 
 @media (max-width : 1024px){
