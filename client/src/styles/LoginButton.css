@@ -1,0 +1,17 @@
+.log-in-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #0A5ADD;
+    border: none;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 0.8rem;
+    padding-left: 0.8rem;
+    border-radius: 0.4rem;
+    color: #f8f8f8;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 2%;
+    margin-bottom: 10%;
+}

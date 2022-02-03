@@ -4,6 +4,9 @@ import Profile from './components/Profile';
 import Navbar from './components/Navbar';
 import StarredMessages from './components/StarredMessages';
 import MentionedMe from './components/MentionedMe';
+import LoginButton from './components/LoginButton';
+import Login from './components/Login';
+
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 // import {Route, Routes, BrowserRouter as Router, Link, Switch} from 'react-router-dom';
 import './styles/App.css';
@@ -16,7 +19,8 @@ function App() {
         <BrowserRouter>
         <Navbar />
         <Routes>
-            <Route path="/" exact element={<Home user = {user}/>} />
+            <Route path="/home" exact element={<Home user = {user}/>} />
+            <Route path="/" exact element={<Login />} />
             <Route path="/profile" exact element={<Profile />} />
             <Route path="/starredmessages" exact element={<StarredMessages />} />
             <Route path="/mentionedme" exact element={<MentionedMe />} />

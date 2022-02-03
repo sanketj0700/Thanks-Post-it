@@ -2,8 +2,20 @@ import React, {useState} from 'react';
 import Card from './Card';
 import '../styles/Home.css';
 import AddButton from './AddButton';
-function Home(props) {
+import { useAuth0,withAuthenticationRequired } from "@auth0/auth0-react";
+
+
+export default withAuthenticationRequired( function Home(props) {
   const [cards, setCards] = useState([ ]);
+  const { user, error, getIdTokenClaims } = useAuth0();
+
+  const idToken = getIdTokenClaims()
+  .then((e) => {return e.__raw});
+
+  if (error) {
+    return <div>Oops... {error.message}</div>;
+  }
+
   return (
     <>
     <div className='home-container'>
@@ -14,6 +26,6 @@ function Home(props) {
      <AddButton cards = {cards} setCards = {setCards}/>
      </>
   );
-}
-
-export default Home;
+}, {
+  onRedirecting: () => (<div>Loading...</div>)
+});

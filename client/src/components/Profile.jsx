@@ -2,9 +2,10 @@ import React,{useState} from 'react';
 import '../styles/Profile.css';
 import MentionedMe from './MentionedMe';
 import StarredMessages from './StarredMessages';
+import { useAuth0,withAuthenticationRequired } from "@auth0/auth0-react";
 
 
-function Profile() {
+export default withAuthenticationRequired( function Profile() {
 
   const [section,setSection] = useState(true);
    const toggleSection = (e)=>{
@@ -50,6 +51,6 @@ function Profile() {
         </div>
     </div>
   );
-}
-
-export default Profile;
+}, {
+  onRedirecting: () => (<div>Loading...</div>)
+});

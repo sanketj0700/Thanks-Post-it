@@ -22,6 +22,20 @@
     list-style: none;
     margin-right: 2rem;
 }
+
+.log-out-button {
+    cursor: pointer;
+}
+
+.log-out-button:hover {
+    font-weight: bold;
+}
+
+.profile-link-active:hover {
+    font-weight: bold;
+}
+
+
 @media (max-width : 1024px){
     .nav-items{
         width: 20%;
