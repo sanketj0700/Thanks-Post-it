@@ -1,10 +1,18 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
 import '../styles/Navbar.css';
+
 function Navbar() {
   return <div className='navbar'>
-      <h2 className='nav-brand'>Thanks Post It</h2> 
+    <Link to='/' style={{textDecoration: 'none'}}>
+      <h2 className='nav-brand'>
+        Thanks Post It
+      </h2>
+    </Link> 
       <ul className='nav-items'>
-          <li>Profile</li>
+          <li className='profile-item'>
+            <Link className='profile-link-active' to='/profile' style={{textDecoration: 'none',color:'black'}}>Profile</Link>
+          </li>
           <li>Logout</li>
       </ul>
   </div>;
