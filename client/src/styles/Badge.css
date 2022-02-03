@@ -3,23 +3,31 @@ input[type = "checkbox"]{
     width: 100%;
 
 }
+label {
+    cursor: pointer;
+}
 #diamond{
     background-color: rgb(211, 50, 130);
     color: #fff;
+    cursor: pointer;
 }
 #platinum{
     background-color: #63adb3;
     color: white;
+    cursor: pointer;
 }
 #gold{
     background-color: #ffd900;
+    cursor: pointer;
 }
 #silver{
     background-color: #c0c0c0;
+    cursor: pointer;
 }
 #bronze{
     background-color: #bd5e00;
     color: white;
+    cursor: pointer;
 }
 #badge{
     background-color: rgb(255, 255, 255);

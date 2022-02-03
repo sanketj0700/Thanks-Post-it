@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Autocomplete, TextField, InputBase } from '@mui/material';
+import { InputBase } from '@mui/material';
 import ImageUploadModal from './ImageUploadModal';
 import '../styles/CardModal.css';
 import '../styles/EditorModal.css';
@@ -64,7 +64,6 @@ function EditorModal({open, setOpen, title, text, badges, dedicated, setTitle, s
             </div>
         </DialogContent>
         <DialogActions>
-            {/* <button onClick={handleOnCancel}>Cancel</button> */}
             <button onClick = {handleOnOk} className='modal-button'>Ok</button>
         </DialogActions>
     </Dialog>
