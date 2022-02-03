@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -12,9 +12,6 @@ import Chip from '@mui/material/Chip';
 function ReaderModal({open, setOpen, card}) {
     const [scroll, setScroll] = useState('paper');
     const badges = card.badges;
-    const handleOnCancel = () => {
-        setOpen(false);
-    }
     const handleOnOk = () => {
         setOpen(false);
     }

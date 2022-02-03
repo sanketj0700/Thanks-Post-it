@@ -8,6 +8,10 @@
     box-shadow: rgb(48, 46, 46) 0px 0px 3px;
     color: rgb(48, 46, 46);
     margin: 0.5em;
+    cursor: pointer;
+}
+.card-container:hover{
+    background-color: #f1f1f1;
 }
 
 @media screen and (max-width: 1000px) {
@@ -33,13 +37,20 @@
     justify-content: space-between;
     align-items: center;
 }
-.card-title{
-    margin-right: 1em;
+.active-star{
+    color: #ffc107;
+    transform: scale(1.4);
+}
+.inactive-star{
+    color: #ffc107;
+    transform: scale(1.4);
 }
 .card-title{
-    font-size: 2rem;
+    font-size: 1.4rem;
     font-weight: bold;
     color: #000;
+    margin-right: 0.8em;
+    margin-left: 0.8em;
 }
 .card-body{
     display: flex;
@@ -60,6 +71,10 @@
 .read-more{
     color: rgb(173, 17, 173);
     margin-top: 1em;
+}
+.read-more:hover{
+    color: rgb(243, 30, 243);
+    text-decoration: underline;
 }
 .dedicated-to{
     font-size: 1.2em;
