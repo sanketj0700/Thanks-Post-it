@@ -3,6 +3,7 @@ import Card from './Card';
 import '../styles/Home.css';
 import AddButton from './AddButton';
 import SearchBar from './SearchBar';
+import Loading from './Loading';
 import { useAuth0,withAuthenticationRequired } from "@auth0/auth0-react";
 import axios from 'axios';
 
@@ -58,5 +59,5 @@ export default withAuthenticationRequired( function Home(props) {
      </>
   );
 }, {
-  onRedirecting: () => (<div>Loading...</div>)
+  onRedirecting: () => (<Loading />)
 });
