@@ -7,7 +7,6 @@ import MentionedMe from './components/MentionedMe';
 import Login from './components/Login';
 
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-// import {Route, Routes, BrowserRouter as Router, Link, Switch} from 'react-router-dom';
 import './styles/App.css';
 
 function App() {

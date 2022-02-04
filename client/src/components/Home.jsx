@@ -16,7 +16,7 @@ export default withAuthenticationRequired( function Home(props) {
 
   const helpSearch = (card) => {
     return (
-      card.user.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      card.user.given_name.toLowerCase().includes(searchTerm.toLowerCase()) || 
       card.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
       card.text.toLowerCase().includes(searchTerm.toLowerCase()) || 
       card.dedicated.toString().toLowerCase().includes(searchTerm.toLowerCase())
@@ -35,15 +35,14 @@ export default withAuthenticationRequired( function Home(props) {
           if (searchTerm === "") {
               return card;
           } else if(helpSearch(card)) {
-            console.log(card.id)
               return card;
           }
           return null;
       }).map(card => (
-        <Card key={card.id} card = {card} user = {props.user}/>
+        <Card key={card.id} card = {card} user = {user}/>
       ))}
     </div>
-     <AddButton cards = {cards} setCards = {setCards}/>
+     <AddButton cards = {cards} setCards = {setCards} loggedInUser = {user}/>
      </>
   );
 }, {

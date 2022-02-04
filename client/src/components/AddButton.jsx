@@ -1,10 +1,12 @@
-import React, { Fragment, useState } from 'react';import Fab from '@material-ui/core/Fab';
+import React, { useState } from 'react';
+import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { Button } from '@mui/material';
 import '../styles/AddButton.css'
 import AddPost from './AddPost';
 function AddButton(props){
     const [open, setOpen] = useState(false);
+    const loggedInUser = props.loggedInUser;
     const handleOnClick = () => {
         setOpen(true);
     }
@@ -17,7 +19,7 @@ function AddButton(props){
                 </Fab>
             </Button>      
         </div>
-        <AddPost open={open} setOpen={setOpen} cards = {props.cards} setCards = {props.setCards}/>
+        <AddPost open={open} setOpen={setOpen} cards = {props.cards} setCards = {props.setCards} loggedInUser = {loggedInUser}/>
         </>
 );
 }
