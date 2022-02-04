@@ -2,6 +2,7 @@ import React from 'react';
 import  { Navigate } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react';
 import LoginButton from './LoginButton';
+import Loading from './Loading';
 
 import '../styles/Login.css'
 import userLogo from '../Icon awesome-user-circle.svg';
@@ -15,7 +16,7 @@ function Login() {
   }
 
   if(isLoading) {
-    return <div>Loading...</div>
+    return <Loading />
   }
   
   return (
