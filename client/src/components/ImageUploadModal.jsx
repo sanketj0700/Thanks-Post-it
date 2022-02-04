@@ -1,10 +1,35 @@
 import {Dialog, DialogContent, DialogActions, DialogContentText, DialogTitle} from '@mui/material';
 import {useState} from 'react';
 import '../styles/CardModal.css';
-const ImageUploadModal = ({openUpload, setOpenUpload, setImage})=>{
 
+
+function ImageUploadModal({openUpload, setOpenUpload, setImage}){
+
+    const [dialogTitle, setDialogTitle] = useState('Upload Image or GIF');
+    const [greaterThan2, setGreaterThan2] = useState(false);
+    const [tempImg, setTempImg] = useState('');
     const handleOnUpload = ()=>{
-        setOpenUpload(false);
+        if(!greaterThan2 && tempImg!==''){
+        {
+            setOpenUpload(false);
+            setImage(tempImg);
+            setTempImg('');
+        }
+    }
+}
+    const handleImageChange = (e)=>{
+        if(Math.floor(e.target.files[0].size/1024) > 2048)
+        {
+            setDialogTitle('Please choose image with size less than 2MB!');
+            setGreaterThan2(true);
+        }
+        else
+        {
+            setDialogTitle('Upload Image or GIF');
+            setGreaterThan2(false);
+            const img = URL.createObjectURL(e.target.files[0]);
+            setTempImg(img);
+        }
     }
  return (
     <Dialog
@@ -14,12 +39,12 @@ const ImageUploadModal = ({openUpload, setOpenUpload, setImage})=>{
     className = 'modal-dialog'
     >
         <DialogTitle className = 'modal-title'>
-            <h2>Upload Image or GIF</h2>
+           {dialogTitle}
         </DialogTitle>
 
         <DialogContent>
             <DialogContentText tabIndex={-1} className = 'note-container'>
-                <input type = 'file' />
+                <input type = 'file' accept='image/*' onChange={handleImageChange}/>
             </DialogContentText>
         </DialogContent>
         <DialogActions>

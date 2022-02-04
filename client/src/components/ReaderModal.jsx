@@ -27,8 +27,9 @@ function ReaderModal({open, setOpen, card}) {
         <DialogTitle className = 'modal-title'>{card.title}</DialogTitle>
         <DialogContent dividers={scroll === 'paper'}>
             <div className = 'modal-image-container'>
-                <img src="thank-you.gif" alt="logo" className = 'modal-image'/>
+                <img src= {card.image} alt="thank-you-image" className = 'modal-image'/>
             </div>
+            <p className = 'modal-date'>Created on : <span className='date'>{card.created_at.substr(0, 10)}</span></p>
             <div className = 'author-display'>
                 <p className = 'modal-author'>Written by: 
                     <Chip
@@ -52,7 +53,7 @@ function ReaderModal({open, setOpen, card}) {
                     </span>
                 </p>
             </div>
-            <p className = 'modal-date'>Created on : <span className='date'>2022-02-01</span></p>
+            
             <DialogContentText tabIndex={-1}>
                 {card.text}
             </DialogContentText>
