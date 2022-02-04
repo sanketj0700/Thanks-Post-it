@@ -12,7 +12,7 @@ import Badge from './Badge';
 import PeopleSelector from './PeopleSelector';
 import MultiLineTextInput from './MultiLineTextInput';
 
-function EditorModal({open, setOpen, title, text, badges, dedicated, setTitle, setText, setBadges, setDedicated, loggedInUser}) {
+function EditorModal({open, setOpen, title, text, badges, dedicated, image, setTitle, setText, setBadges, setDedicated, setImage, loggedInUser}) {
     const scroll = 'paper';
     const [openUpload, setOpenUpload] = useState(false);
     const badgeList = ['bronze', 'silver', 'gold', 'platinum', 'diamond'];
@@ -92,7 +92,7 @@ function EditorModal({open, setOpen, title, text, badges, dedicated, setTitle, s
     }
   return (
       <>
-      {openUpload? <ImageUploadModal openUpload={openUpload} setOpenUpload={setOpenUpload} /> : null}
+      {openUpload? <ImageUploadModal openUpload={openUpload} setOpenUpload={setOpenUpload} image = {image} setImage={setImage}/> : null}
   <div className='modal'>
     <Dialog
     open = {open}
@@ -107,7 +107,7 @@ function EditorModal({open, setOpen, title, text, badges, dedicated, setTitle, s
 
         <DialogContent dividers={scroll === 'paper'}>
             <div className = 'modal-image-container'>
-                <img src="thank-you.gif" alt="logo" className = 'modal-image' onClick={()=> setOpenUpload(true)}/>
+                <img src={image} alt="logo" className = 'modal-image' onClick={()=> setOpenUpload(true)}/>
             </div>
             
             <div className="modal-dedicated-to-container">

@@ -18,6 +18,7 @@ function AddPost(props) {
     const [title, setTitle] = useState('');
     const [dedicated, setDedicated]= useState([]);
     const [badges, setBadges] = useState([]);
+    const [image, setImage] = useState('thank-you.gif');
     const scroll = 'paper';
     const badgeList = ['bronze', 'silver', 'gold', 'platinum', 'diamond'];
     const [openUpload, setOpenUpload] = useState(false);
@@ -89,13 +90,14 @@ function AddPost(props) {
                 user: loggedInUser,
                 text: text,
                 badges: badges,
-                dedicated: dedicated
+                dedicated: dedicated,
+                image: image,
+                created_at: new Date().toLocaleString(),
             }
 
             props.setCards([newCard, ...props.cards]);
-
             // send to server 
-            //axios.post('https://thanks-post-it/message/create', {...newCard, email: loggedInUser.email});
+            //axios.post('https://thanks-post-it/message/create', {...newCard, id: loggedInUser.email});
 
             setTitle('');
             setBadges([]);
@@ -105,7 +107,7 @@ function AddPost(props) {
     }
   return (
   <>
-  {openUpload? <ImageUploadModal openUpload={openUpload} setOpenUpload={setOpenUpload} /> : null}
+  {openUpload? <ImageUploadModal openUpload={openUpload} setOpenUpload={setOpenUpload} setImage={setImage}/> : null}
   
   <div className='modal'>
     <Dialog
@@ -121,7 +123,7 @@ function AddPost(props) {
 
         <DialogContent dividers={scroll === 'paper'}>
             <div className = 'modal-image-container'>
-                <img src="thank-you.gif" alt="logo" className = 'modal-image' onClick={()=> setOpenUpload(true)}/>
+                <img src={image} alt="logo" className = 'modal-image' onClick={()=> setOpenUpload(true)}/>
             </div>
             
             <div className="modal-dedicated-to-container">

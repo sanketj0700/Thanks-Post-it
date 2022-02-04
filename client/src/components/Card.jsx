@@ -15,6 +15,7 @@ function Card(props) {
     const [text, setText] = useState(props.card.text);
     const [badges, setBadges] = useState(props.card.badges);
     const [dedicated, setDedicated] = useState(props.card.dedicated);
+    const [image, setImage] = useState(props.card.image);
     const [activeStar, setActiveStar] = useState(false);
     const text_limit = 200;
     const user = props.card.user;
@@ -34,6 +35,7 @@ function Card(props) {
     open = {open} 
     setOpen = {setOpen}
     loggedInUser = {loggedInUser}
+    image = {image}
     title = {title}
     text = {text}
     badges = {badges}
@@ -42,6 +44,7 @@ function Card(props) {
     setText = {setText}
     setBadges = {setBadges}
     setDedicated = {setDedicated}
+    setImage = {setImage}
     />
     : <ReaderModal open={open} setOpen={setOpen} card = {props.card}/>}
     <div className='card-container' onClick={handleOnClick}>
