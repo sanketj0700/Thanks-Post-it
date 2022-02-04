@@ -4,58 +4,103 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Autocomplete, TextField, InputBase } from '@mui/material';
+import MultiLineTextInput from './MultiLineTextInput';
+import ModalTitle from './ModalTitle';
 import ImageUploadModal from './ImageUploadModal';
 import '../styles/CardModal.css';
 import '../styles/EditorModal.css';
 import Badge from './Badge'
 import PeopleSelector from './PeopleSelector';
-
-
-
+import axios from 'axios';
 
 function AddPost(props) {
     const [text, setText] = useState('');
     const [title, setTitle] = useState('');
     const [dedicated, setDedicated]= useState([]);
     const [badges, setBadges] = useState([]);
-    const [scroll, setScroll] = useState('paper');
+    const scroll = 'paper';
     const badgeList = ['bronze', 'silver', 'gold', 'platinum', 'diamond'];
     const [openUpload, setOpenUpload] = useState(false);
-    const [newCard, setNewCard] = useState(false);
-    
-    const onBadgeClick = ()=>{
-        console.log("Badge")
-    }
+    const loggedInUser = props.loggedInUser;
+
+    const peopleOptions = [
+        {
+        name: 'Riddhi Batas',
+        given_name: 'Riddhi',
+        family_name: 'Batas',
+        email: 'riddhi.batas@searce.com',
+        picture: 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg',
+        google_id: '108879585989738247589',
+        },
+        {
+        name: 'Sanket Jain',
+        given_name: 'Sanket',
+        family_name: 'Jain',
+        email: 'sanket.jain@searce.com',
+        picture: 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg',
+        google_id: '108879585989738247589',
+        },
+        {
+        name: 'Mihir Doshi',
+        given_name: 'Mihir',
+        family_name: 'Doshi',
+        email: 'mihir.doshi@searce.com',
+        picture: 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg',
+        google_id: '108879585989738247589',
+        },
+        {
+        name: 'Dhanvi Patel',
+        given_name: 'Dhanvi',
+        family_name: 'Patel',
+        email: 'dhanvi.shah@searce.com',
+        picture: 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg',
+        google_id: '108879585989738247589',
+        },
+        {
+        name: 'Taniya Hinduja',
+        given_name: 'Taniya',
+        family_name: 'Hinduja',
+        email: 'taniya.hinduja@searce.com',
+        picture: 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg',
+        google_id: '108879585989738247589',
+        },
+        {
+            name:'Karan Bhatia',
+            given_name:'Karan',
+            family_name:'Bhatia',
+            email:'karan.bhatia@searce.com',
+            picture:'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg',
+            google_id:'108879585989738247589',
+        }
+];
+
     const handleOnCancel = () => {
         props.setOpen(false);
     }
   
+    const handleOnAdd = () =>{
 
-    function handleOnOk () {
-        if(false){
-            alert("Please fill out all the fields")
-
-        }
-        else
-        {
+        if(title.length > 0 && text.length > 0 && dedicated.length > 0){
             props.setOpen(false);
-            console.log("OK")
-            const updateCards = 
+            const newCard =
             {
-                id: '',
+                id: props.cards.length + 1,
                 title: title,
-                user: '',
+                user: loggedInUser,
                 text: text,
                 badges: badges,
                 dedicated: dedicated
             }
 
-            props.setCards([...props.cards, updateCards])
+            props.setCards([newCard, ...props.cards]);
 
-            setTitle('')
-            setBadges([])
-            setText('')
+            // send to server 
+            //axios.post('https://thanks-post-it/message/create', {...newCard, email: loggedInUser.email});
+
+            setTitle('');
+            setBadges([]);
+            setText('');
+            setDedicated([]);
         }
     }
   return (
@@ -71,9 +116,7 @@ function AddPost(props) {
     className = 'modal-dialog'
     >
         <DialogTitle className = 'modal-title'>
-            <input placeholder='Thank you ....' value= {title} onChange ={(e)=>{
-                setTitle(e.target.value)
-            }}></input>
+            <ModalTitle title = {title} setTitle={setTitle} />
         </DialogTitle>
 
         <DialogContent dividers={scroll === 'paper'}>
@@ -82,18 +125,11 @@ function AddPost(props) {
             </div>
             
             <div className="modal-dedicated-to-container">
-                <PeopleSelector names={['Taniya', 'Dhanvi', 'Riddhi', 'Karan', 'Mihir', 'Sanket']} dedicated = {dedicated} />
+                <PeopleSelector names={peopleOptions.filter(name => name.given_name!=loggedInUser.given_name)} dedicated = {dedicated} setDedicated = {setDedicated}/>
             </div>
             
             <DialogContentText tabIndex={-1} className = 'note-container'>
-                <InputBase 
-                    className = 'note-input'
-                    type='textarea' placeholder='Dear xyz thank you ....'
-                    fullWidth multiline
-                    onChange={(e)=>{
-                        setText(e.target.value)
-                    }}
-                />
+                <MultiLineTextInput text = {text} setText = {setText}/>
             </DialogContentText>
             <div className='modal-badges-display'>
                 <h4 className='badges-title'>Badges</h4>
@@ -107,7 +143,7 @@ function AddPost(props) {
         </DialogContent>
         <DialogActions>
             <button onClick={handleOnCancel} className='modal-button'>Cancel</button>
-            <button onClick = {handleOnOk} className='modal-button'>Ok</button>
+            <button onClick = {handleOnAdd} className='modal-button'>Add</button>
         </DialogActions>
     </Dialog>
   </div>

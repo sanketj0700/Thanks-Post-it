@@ -18,6 +18,7 @@ function Card(props) {
     const [activeStar, setActiveStar] = useState(false);
     const text_limit = 200;
     const user = props.card.user;
+    const loggedInUser = props.user;
 
     const handleOnClick = () => {
         setOpen(true);
@@ -28,10 +29,11 @@ function Card(props) {
     }
   return (
     <>
-    {user === props.user? 
+    {user.given_name === loggedInUser.given_name? 
     <EditorModal 
     open = {open} 
     setOpen = {setOpen}
+    loggedInUser = {loggedInUser}
     title = {title}
     text = {text}
     badges = {badges}
@@ -52,17 +54,17 @@ function Card(props) {
             )}
         </IconButton>
         <h2 className='card-title'>{title}</h2>
-        <Avatar src = 'logo192.png' alt = {user}/>
+        <Avatar src = {user.picture} alt = {user.given_name}/>
       </div>
       <div className='card-body'>
             <p className='card-text'>
               {text.length > text_limit? <span className='short-text'>{text.substring(0, text_limit)} <span className = 'read-more'>  Read more ...</span> </span> : text}
             </p>
-            <p className='dedicated-to'>To: {dedicated.map((name, index)=>{
+            <p className='dedicated-to'>To: {dedicated.map((person, index)=>{
                 return <Chip
                 key={index}
-                avatar={<Avatar alt={name} src="logo192.png" />}
-                label={name}
+                avatar={<Avatar alt={person.given_name} src={person.picture} />}
+                label={person.given_name}
                 variant="outlined"
               /> 
             })}</p>

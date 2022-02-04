@@ -32,19 +32,19 @@ function ReaderModal({open, setOpen, card}) {
             <div className = 'author-display'>
                 <p className = 'modal-author'>Written by: 
                     <Chip
-                        avatar={<Avatar alt={card.user} src="logo192.png" />}
-                        label={card.user}
+                        avatar={<Avatar alt={card.user.given_name} src={card.user.picture} />}
+                        label={card.user.given_name}
                         variant="outlined"
                         style = {{margin: '0px 5px'}}
                     /> 
                 </p>
                 <p className = 'modal-dedicated'>Dedicated to: 
                     <span className = 'receiver'>
-                        {card.dedicated.map((name, index)=>{
+                        {card.dedicated.map((person, index)=>{
                             return <Chip
                             key={index}
-                            avatar={<Avatar alt={name} src="logo192.png" />}
-                            label={name}
+                            avatar={<Avatar alt={person.given_name} src={person.picture} />}
+                            label={person.given_name}
                             variant="outlined"
                             style = {{margin: '0px 5px'}}
                           /> 
