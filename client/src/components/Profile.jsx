@@ -28,14 +28,13 @@ export default withAuthenticationRequired( function Profile() {
             </div>
             <div className='user-name'>
                 <div className='name'>Dhanvi Shah</div>
-                <div className='position'>Software Engineer</div>
             </div>
             <div className='profile-badges'>
-              <ul className='badge-1'>Diamond badges : </ul>
-              <ul className='badge-2'>Golden badges : </ul>
-              <ul className='badge-3'>Silver badges : </ul>
-              <ul className='badge-4'>Bronze badges : </ul>
-              <ul className='badge-5'>Timepass badges : </ul>
+              <ul className='diamond'>Diamond badges : </ul>
+              <ul className='golden'>Golden badges : </ul>
+              <ul className='silver'>Silver badges : </ul>
+              <ul className='bronze'>Bronze badges : </ul>
+              <ul className='platinum'>Platinum badges : </ul>
             </div>
         </div>
 
