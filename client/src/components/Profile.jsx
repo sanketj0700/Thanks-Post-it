@@ -18,7 +18,6 @@ export default withAuthenticationRequired( function Profile() {
      {
        setSection(false)
      }
-     //console.log(e.target.className)
    };
 
   return (

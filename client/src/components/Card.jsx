@@ -8,7 +8,7 @@ import Chip from '@mui/material/Chip';
 import IconButton from '@mui/material/IconButton';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
-
+import axios from 'axios';
 function Card(props) {
     const [open, setOpen] = useState(false);
     const [title, setTitle] = useState(props.card.title);
@@ -17,9 +17,12 @@ function Card(props) {
     const [dedicated, setDedicated] = useState(props.card.dedicated);
     const [image, setImage] = useState(props.card.image);
     const [activeStar, setActiveStar] = useState(false);
+    const _id = props.card._id;
+    const peopleOptions = props.peopleOptions;
     const text_limit = 200;
-    const user = props.card.user;
+    const user = props.card.author;
     const loggedInUser = props.user;
+    const url = 'https://thanks-post-it-backend.herokuapp.com';
 
     const handleOnClick = () => {
         setOpen(true);
@@ -27,10 +30,33 @@ function Card(props) {
     const handleStar = (e) =>{
       e.stopPropagation();
       setActiveStar(!activeStar);
+      // send to server
+      const body = {
+        message_id: _id,
+        email: loggedInUser.email
+      }
+      const config = {
+        mode: 'no-cors',
+        headers: {
+          'Authorization' : `Bearer ${localStorage.getItem('token')}`,
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+        }
+      }
+      if(!activeStar){
+      axios.post(`${url}/user/addToStarred`, body, config).then(res=>{
+          console.log(res.data);
+      });
+      }
+      else{
+        axios.post(`${url}/user/removeFromStarred`, body, config).then(res=>{
+            console.log(res.data);
+        });
+      }
     }
   return (
     <>
-    {user.given_name === loggedInUser.given_name? 
+    {user.email === loggedInUser.email? 
     <EditorModal 
     open = {open} 
     setOpen = {setOpen}
@@ -40,6 +66,8 @@ function Card(props) {
     text = {text}
     badges = {badges}
     dedicated = {dedicated} 
+    _id = {_id}
+    peopleOptions={peopleOptions}
     setTitle = {setTitle}
     setText = {setText}
     setBadges = {setBadges}

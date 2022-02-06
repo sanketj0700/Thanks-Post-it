@@ -21,11 +21,17 @@ function Login() {
   
   return (
       <>
-        <div className='login-container'>
-            <img src={userLogo} alt='Hello Amigo' className='image-login'/>
-            <p className='greeting-login'>Welcome User</p>
-            <p className='continue-with'>Continue with</p>
-            <LoginButton />
+        <div className='login-page'>
+          <div className = 'login-sidebar'>
+            <img src = 'thanks.jpg' alt = 'thanks-svg' className='thanks-image'/>
+          </div>
+          <div className='login-container'>
+            <div className='login-wrapper'>
+                <h1 className='signin-text'>Sign in to Thanks Post It</h1> 
+                <p className='greeting-login'>Welcome to Thanks Post it! Please use your @searce.com email to sign in.</p>
+                <LoginButton />
+            </div>
+          </div>
         </div>
       </>
   );

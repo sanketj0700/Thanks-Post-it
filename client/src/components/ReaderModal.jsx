@@ -33,8 +33,8 @@ function ReaderModal({open, setOpen, card}) {
             <div className = 'author-display'>
                 <p className = 'modal-author'>Written by: 
                     <Chip
-                        avatar={<Avatar alt={card.user.given_name} src={card.user.picture} />}
-                        label={card.user.given_name}
+                        avatar={<Avatar alt={card.author.given_name} src={card.author.picture} />}
+                        label={card.author.given_name}
                         variant="outlined"
                         style = {{margin: '0px 5px'}}
                     /> 
