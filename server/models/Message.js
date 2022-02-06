@@ -7,32 +7,65 @@ const messageSchema = new Schema({
         required : true,
         ref : 'User'
     },
-    data : {
-        type : String,
-        required : true,
-        trim : true
-    },
-    title : {
-        type : String,
-        required : true,
-        trim : true,
-    },
-    dedicatedTo : [{
-        name : {
+    card : {
+        type : Object,
+        data : {
             type : String,
-            trim : true,
-            // required : true,
+            required : true,
+            trim : true
         },
-        email : {
+        title : {
             type : String,
+            required : true,
             trim : true,
-            // required : true,
         },
-        img : {
+        image : {
             type : String,
-            trim : true,
-        }
-    }],
+            trim : true
+        },
+        dedicated : [{
+            name : {
+                type : String,
+                trim : true,
+                // required : true,
+            },
+            email : {
+                type : String,
+                trim : true,
+                // required : true,
+            },
+            picture : {
+                type : String,
+                trim : true,
+            },
+            given_name : {
+                type : String,
+                trim : true,
+            }
+        }],
+        author : {
+            type :Object,
+            name : {
+                type : String,
+                trim : true,
+                // required : true,
+            },
+            email : {
+                type : String,
+                trim : true,
+                // required : true,
+            },
+            picture : {
+                type : String,
+                trim : true,
+            },
+            given_name : {
+                type : String,
+                trim : true,
+            }
+        },
+        badges : String
+    },
     createdAt : {
         type: Date,
         default : Date.now()

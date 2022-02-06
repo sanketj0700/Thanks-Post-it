@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const UserSchema =  new Schema({
     _id : false,
     _id : String,
-    fullName : {
+    name : {
         type: String,
         trim: true,
         required : true,
@@ -14,14 +14,45 @@ const UserSchema =  new Schema({
         trim: true,
     },
     badges :{
-        tpye : Map,
-        of : Number
+        type : Object,
+        bronze : {
+            type : Number,
+            default : 0,
+        },
+        silver : {
+            type : Number,
+            default : 0,
+        },
+        gold : {
+            type : Number,
+            default : 0,
+        },
+        diamond : {
+            type : Number,
+            default : 0,
+        },
+        platinum : {
+            type : Number,
+            default : 0,
+        }
     },
     starred :{
         type : [mongoose.Schema.Types.ObjectId],
         ref : 'Message',
     },
-    profilePicture : {
+    picture : {
+        type : String,
+        trim : true,
+    },
+    given_name : {
+        type : String,
+        trim : true,
+    },
+    nickname : {
+        type : String,
+        trim : true,
+    },
+    family_name : {
         type : String,
         trim : true,
     }
