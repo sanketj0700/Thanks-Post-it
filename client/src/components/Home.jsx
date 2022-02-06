@@ -12,23 +12,41 @@ export default withAuthenticationRequired( function Home(props) {
   const [cards, setCards] = useState([ ]);
   const [ searchTerm, setSearchTerm ] = useState("");
   const { user, error, getIdTokenClaims } = useAuth0();
+  const [peopleOptions, setPeopleOptions] = useState([]);
+  const url = 'https://thanks-post-it-backend.herokuapp.com';
   // on first load get all cards
   useEffect(() => {
     getIdTokenClaims().then((e)=>{
-        axios.get('https://thanks-post-it.herokuapp.com/message/read', {
+       
+      //store token in local storage
+      localStorage.setItem('token', e.__raw);
+
+      const config = {
+        mode: 'no-cors',
         headers: {
-          Authorization: `Bearer ${e.__raw}`
+          'Authorization' : `Bearer ${localStorage.getItem('token')}`,
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
         }
-      }).then(res => {
-        console.log(res.data);
+      }
+      //get all cards
+      axios.get(`${url}/message/read`, config).then(res => {
+        setCards(res.data.data);
       });
-    })
-  });
+
+      // get people options
+      axios.get(`${url}/user/`, config).then(res => {
+        setPeopleOptions(res.data.data);
+      })
+
+
+    });
+  }, []);
 
 
   const helpSearch = (card) => {
     return (
-      card.user.given_name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      card.author.given_name.toLowerCase().includes(searchTerm.toLowerCase()) || 
       card.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
       card.text.toLowerCase().includes(searchTerm.toLowerCase()) || 
       card.dedicated.map(person=>person.given_name).toString().toLowerCase().includes(searchTerm.toLowerCase())||
@@ -52,10 +70,10 @@ export default withAuthenticationRequired( function Home(props) {
           }
           return null;
       }).map(card => (
-        <Card key={card.id} card = {card} user = {user}/>
+        <Card key={card._id} card = {card} user = {user} peopleOptions = {peopleOptions}/>
       ))}
     </div>
-     <AddButton cards = {cards} setCards = {setCards} loggedInUser = {user}/>
+     <AddButton cards = {cards} setCards = {setCards} loggedInUser = {user} peopleOptions = {peopleOptions}/>
      </>
   );
 }, {

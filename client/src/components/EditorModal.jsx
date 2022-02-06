@@ -11,62 +11,14 @@ import '../styles/EditorModal.css';
 import Badge from './Badge';
 import PeopleSelector from './PeopleSelector';
 import MultiLineTextInput from './MultiLineTextInput';
+import axios from 'axios';
 
-function EditorModal({open, setOpen, title, text, badges, dedicated, image, setTitle, setText, setBadges, setDedicated, setImage, loggedInUser}) {
+function EditorModal({open, setOpen, title, text, badges, dedicated, image, _id, setTitle, setText, setBadges, setDedicated, setImage, loggedInUser, peopleOptions}) {
     const scroll = 'paper';
     const [openUpload, setOpenUpload] = useState(false);
     const badgeList = ['bronze', 'silver', 'gold', 'platinum', 'diamond'];
-    const peopleOptions = [
-        {
-        name: 'Riddhi Batas',
-        given_name: 'Riddhi',
-        family_name: 'Batas',
-        email: 'riddhi.batas@searce.com',
-        picture: 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg',
-        google_id: '108879585989738247589',
-        },
-        {
-        name: 'Sanket Jain',
-        given_name: 'Sanket',
-        family_name: 'Jain',
-        email: 'sanket.jain@searce.com',
-        picture: 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg',
-        google_id: '108879585989738247589',
-        },
-        {
-        name: 'Mihir Doshi',
-        given_name: 'Mihir',
-        family_name: 'Doshi',
-        email: 'mihir.doshi@searce.com',
-        picture: 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg',
-        google_id: '108879585989738247589',
-        },
-        {
-        name: 'Dhanvi Patel',
-        given_name: 'Dhanvi',
-        family_name: 'Patel',
-        email: 'dhanvi.shah@searce.com',
-        picture: 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg',
-        google_id: '108879585989738247589',
-        },
-        {
-        name: 'Taniya Hinduja',
-        given_name: 'Taniya',
-        family_name: 'Hinduja',
-        email: 'taniya.hinduja@searce.com',
-        picture: 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg',
-        google_id: '108879585989738247589',
-        },
-        {
-            name:'Karan Bhatia',
-            given_name:'Karan',
-            family_name:'Bhatia',
-            email:'karan.bhatia@searce.com',
-            picture:'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg',
-            google_id:'108879585989738247589',
-        }
-];
 
+    const url = 'https://thanks-post-it-backend.herokuapp.com';
     //temporary state for the modal before saving
     const [tempTitle, setTempTitle] = useState(title);
     const [tempText, setTempText] = useState(text);
@@ -81,6 +33,30 @@ function EditorModal({open, setOpen, title, text, badges, dedicated, image, setT
             setBadges(tempBadges);
             setDedicated(tempDedicated);
             setOpen(false);
+            console.log(image);
+
+            // update request to server
+            const config = {
+                mode: 'no-cors',
+                headers: {
+                  'Authorization' : `Bearer ${localStorage.getItem('token')}`,
+                  'Access-Control-Allow-Origin': '*',
+                  'Content-Type': 'application/json',
+                }
+            }
+            const body = {
+                title: tempTitle,
+                text: tempText,
+                badges: tempBadges,
+                dedicated: tempDedicated,
+                image: image,
+                _id: _id
+            }
+            axios.patch(`${url}/message/update`, 
+                body, config
+            ).then(res=>{
+                console.log(res.data);
+            });
         }
     }
     const handleOnCancel = () => {
@@ -107,7 +83,7 @@ function EditorModal({open, setOpen, title, text, badges, dedicated, image, setT
 
         <DialogContent dividers={scroll === 'paper'}>
             <div className = 'modal-image-container'>
-                <img src={image} alt="logo" className = 'modal-image' onClick={()=> setOpenUpload(true)}/>
+                <img src={image} alt="thank-you" className = 'modal-image' onClick={()=> setOpenUpload(true)}/>
             </div>
             
             <div className="modal-dedicated-to-container">

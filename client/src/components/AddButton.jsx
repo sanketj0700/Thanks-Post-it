@@ -19,7 +19,10 @@ function AddButton(props){
                 </Fab>
             </Button>      
         </div>
-        <AddPost open={open} setOpen={setOpen} cards = {props.cards} setCards = {props.setCards} loggedInUser = {loggedInUser}/>
+        <AddPost open={open} setOpen={setOpen} cards = {props.cards} 
+        setCards = {props.setCards} 
+        peopleOptions = {props.peopleOptions} 
+        loggedInUser = {loggedInUser}/>
         </>
 );
 }
