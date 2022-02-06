@@ -2,29 +2,43 @@ const express = require('express');
 const Message = require('../models/Message');
 const User = require('../models/User');
 const {authorizeAccessToken} = require('../middleware/auth');
+const cote = require('cote');
+const { response } = require('express');
 
 const router = express.Router();
+
+const messageServiceRequester = new cote.Requester({
+    name: 'message service requester',
+    key : 'message'
+});
+
 
 // 
 // @desc        Creates Message
 // @route       POST /message/create
 router.post('/create',authorizeAccessToken,async(req,res)=>{
     try{
-        const message = new Message({
+        const message =  {
             user : req.body.id,
-            title : req.body.title,
-            data : req.body.message,
-            dedicatedTo : req.body.dedicatedTo
-        })
-        const saveMessage = await message.save();
-        res.send({
-            error: false,
-            msg : message._id
-        });
+            card : req.body.card
+        }
 
+        // const saveMessage = await message.save();
+        // res.status(200).send({
+        //     error: false,
+        //     msg : message._id
+        // });
+
+        messageServiceRequester.send({type:'create',message},(response)=>{
+            return res.status(200).send({
+                error: false,
+                msg : response
+            });    
+        });
+        
     }catch(err){
         console.log(err);
-        res.send({
+        res.status(404).send({
             error : true,
             msg : err.message
         });
@@ -36,14 +50,21 @@ router.post('/create',authorizeAccessToken,async(req,res)=>{
 
 router.get('/read',authorizeAccessToken,async(req,res)=>{
     try{
-        const message = await Message.find({}).sort({_id : -1}).limit(40).skip(req.body.skip);
-        res.send({
-            error : false,
-            msg : message
-        })
+        // const message = await Message.find({}).sort({_id : -1}).limit(40).skip(req.body.skip);
+        // res.status(200).send({
+        //     error : false,
+        //     msg : message
+        // })
+        const readRequest = {type : 'read'};
+        messageServiceRequester.send(readRequest,(response)=>{
+        return res.status(200).send({
+            error : response.error,
+            cards : response.msg
+        }).end();
+    });
     }catch(err){
         console.log(err);
-        res.send({
+        res.status(404).send({
             error : true,
             msg : err.message
         });
@@ -55,23 +76,35 @@ router.get('/read',authorizeAccessToken,async(req,res)=>{
 
 router.patch('/update',authorizeAccessToken,async(req,res)=>{
     try{
+        // const update = {
+        //     card : req.body.card
+        // };
+        // const message = await Message.findOneAndUpdate({
+        //     _id : req.body._id
+        //     },update,{
+        //     new : false
+        // }).then(
+        //     res.status(200).send({
+        //         error : false,
+        //         msg : "Updated !!!!!!!!",
+        //     })
+        // );
+
         const update = {
-            data : req.body.message,
-            title : req.body.title,
-            dedicatedTo : req.body.dedicatedTo
-        };
-        const message = await Message.findOneAndUpdate({
-            _id : req.body._id
-            },update,{
-            new : false
-        }).then(
-            res.send({
-                error : false,
-                msg : "Updated !!!!!!!!",
-            })
-        );
+            card : req.body.card,
+            id : req.body.user
+        }
+        messageServiceRequester.send({type : 'update',update},(response)=>{
+
+            return res.status(200).send({
+                error : response.error,
+                msg : response.msg,
+            }).end();
+
+        })
+
     }catch(err){
-        console.log(err);
+        console.status(404).log(err);
         res.send({
             error : true,
             msg : err.message
@@ -84,15 +117,27 @@ router.patch('/update',authorizeAccessToken,async(req,res)=>{
 
 router.delete('/delete',authorizeAccessToken,async(req,res)=>{
     try{
-         await Message.findOneAndRemove({_id : req.body._id}).then(
-            res.send({
-                error : false,
-                msg : "Deleted !!!!!!!!",
-            })
-        );
+        //  await Message.findOneAndRemove({_id : req.body._id}).then(
+        //     res.status(200).send({
+        //         error : false,
+        //         msg : "Deleted !!!!!!!!",
+        //     })
+        // );
+
+        messageServiceRequester.send({type:'delete',id : req.body.user},(response)=>{
+
+            return res.status(200).send({
+                error : response.error,
+                msg : response.msg,
+            }).end();
+
+        });
+
+        
+
     }catch(err){
         console.log(err);
-        res.send({
+        res.status(404).send({
             error : true,
             msg : err.message
         });
@@ -104,14 +149,14 @@ router.delete('/delete',authorizeAccessToken,async(req,res)=>{
 router.get('/user_id',authorizeAccessToken,async(req,res)=>{
     try{
         await Message.find({user : req.body.user_id}).limit(10).sort({_id : -1}).skip(req.body.skip).then(data=>{
-            res.send({
+            res.status(200).send({
                 error: false,
                 msg : data
             })
         });
     }catch(err){
         console.log(err);
-        res.send({
+        res.status(404).send({
             error : true,
             msg : err.message
         });
@@ -123,16 +168,23 @@ router.get('/user_id',authorizeAccessToken,async(req,res)=>{
 
 router.get('/starredMessages',authorizeAccessToken,async(req,res)=>{
     try{
-        await Message.find({_id : req.body.starred}).sort({_id : -1}).skip(req.body.skip).limit(10).then(data=>{
-            res.send({
-                error: false,
-                msg : data
-            })
-        });
+        // await Message.find({_id : req.body.starred}).sort({_id : -1}).skip(req.body.skip).limit(10).then(data=>{
+        //     res.status(200).send({
+        //         error: false,
+        //         msg : data
+        //     })
+        // });
+
+        messageServiceRequester.send({type : 'starredMessages', starred : req.body.starred},(response)=>{
+            return res.status(200).send({
+                error : response.error,
+                msg : response.msg,
+            }).end();
+        })
 
     }catch(err){
         console.log(err);
-        res.send({
+        res.status(404).send({
             error : true,
             msg : err.message
         });
@@ -144,15 +196,23 @@ router.get('/starredMessages',authorizeAccessToken,async(req,res)=>{
 
 router.get('/search',authorizeAccessToken,async(req,res)=>{
     try{
-        await Message.find({ $text : {$search : req.body.query}}).sort({_id : -1}).limit(50).skip(req.body.skip).then(data=>{
-            res.send({
-                error: false,
-                data,
-            })
-        });
+        // await Message.find({ $text : {$search : req.body.query}}).sort({_id : -1}).limit(50).skip(req.body.skip).then(data=>{
+        //     res.status(200).send({
+        //         error: false,
+        //         data,
+        //     })
+        // });
+
+        messageServiceRequester.send({type : 'search', query : req.body.query},(response)=>{
+            return res.status(200).send({
+                error : response.error,
+                msg : response.data,
+            }).end();
+        })
+
     }catch(err){
         console.log(err);
-        res.send({
+        res.status(404).send({
             error : true,
             msg : err.message
         });
@@ -164,15 +224,23 @@ router.get('/search',authorizeAccessToken,async(req,res)=>{
 
 router.get('/dedicatedTo',authorizeAccessToken,async(req,res)=>{
     try{
-        await Message.find({"dedicatedTo.email" : req.body.email}).sort({_id : -1}).limit(40).skip(req.body.skip).then(data=>{
-            res.send({
-                error : false,
-                data
-            });
-        });
+        // await Message.find({"card.dedicated.email" : req.body.email}).sort({_id : -1}).limit(40).skip(req.body.skip).then(data=>{
+        //     res.status(200).send({
+        //         error : false,
+        //         data
+        //     });
+        // });
+
+        messageServiceRequester.send({type : 'dedicatedTo', email : req.body.user},(response)=>{
+            return res.status(200).send({
+                error : response.error,
+                msg : response.data,
+            }).end();
+        })
+
     }catch(err){
         console.log(err);
-        res.send({
+        res.status(404).send({
             error : true,
             msg : err.message
         });
