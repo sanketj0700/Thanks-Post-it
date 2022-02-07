@@ -47,10 +47,14 @@
 }
 .card-title{
     font-size: 1.4rem;
+    max-width: 60%;
+    word-wrap: break-word;
     font-weight: bold;
     color: #000;
     margin-right: 0.8em;
     margin-left: 0.8em;
+}
+.author-avatar{
 }
 .card-body{
     display: flex;

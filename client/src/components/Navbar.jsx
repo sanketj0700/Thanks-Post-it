@@ -21,7 +21,7 @@ function Navbar() {
           <li className='profile-item'>
             <Link className='profile-link-active' to='/profile' style={{ textDecoration: 'none', color: 'black' }}>Profile</Link>
           </li>
-          <li onClick={() => logout({ returnTo: "http://localhost:3000" })} className='log-out-button'>Logout</li>
+          <li onClick={() => logout({ returnTo: process.env.REACT_APP_ENV === 'production'? 'https://thanks-post-it.vercel.app/' : 'http://localhost:3000/' })} className='log-out-button'>Logout</li>
         </ul>
       </div>
     )

@@ -16,13 +16,14 @@ function Card(props) {
     const [badges, setBadges] = useState(props.card.badges);
     const [dedicated, setDedicated] = useState(props.card.dedicated);
     const [image, setImage] = useState(props.card.image);
-    const [activeStar, setActiveStar] = useState(false);
     const _id = props.card._id;
+    const starredMessages = props.user.starred;
+    const [activeStar, setActiveStar] = useState(starredMessages.includes(_id));
     const peopleOptions = props.peopleOptions;
     const text_limit = 200;
     const user = props.card.author;
     const loggedInUser = props.user;
-    const url = 'https://thanks-post-it-backend.herokuapp.com';
+    const url = process.env.REACT_APP_ENV === 'production'? 'https://thanks-post-it-backend.herokuapp.com' : 'http://localhost:5000';
 
     const handleOnClick = () => {
         setOpen(true);
@@ -36,21 +37,17 @@ function Card(props) {
         email: loggedInUser.email
       }
       const config = {
-        mode: 'no-cors',
+        mode: 'cors',
         headers: {
           'Authorization' : `Bearer ${localStorage.getItem('token')}`,
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
         }
       }
       if(!activeStar){
-      axios.post(`${url}/user/addToStarred`, body, config).then(res=>{
-          console.log(res.data);
-      });
+      axios.post(`${url}/user/addToStarred`, body, config);
       }
       else{
         axios.post(`${url}/user/removeFromStarred`, body, config).then(res=>{
-            console.log(res.data);
+          console.log(res.data);
         });
       }
     }
@@ -85,7 +82,7 @@ function Card(props) {
             )}
         </IconButton>
         <h2 className='card-title'>{title}</h2>
-        <Avatar src = {user.picture} alt = {user.given_name}/>
+        <Avatar src = {user.picture} alt = {user.given_name} className = 'author-avatar'/>
       </div>
       <div className='card-body'>
             <p className='card-text'>

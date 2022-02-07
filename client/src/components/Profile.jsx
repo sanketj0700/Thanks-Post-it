@@ -3,11 +3,13 @@ import '../styles/Profile.css';
 import MentionedMe from './MentionedMe';
 import StarredMessages from './StarredMessages';
 import Loading from './Loading';
+import Avatar from '@mui/material/Avatar';
 import { useAuth0,withAuthenticationRequired } from "@auth0/auth0-react";
 
 
 export default withAuthenticationRequired( function Profile() {
 
+  const loggedInUser = JSON.parse(localStorage.getItem('user'));
   const [section,setSection] = useState(true);
    const toggleSection = (e)=>{
      if(e.target.className === 'messages-1' && !section)
@@ -23,11 +25,15 @@ export default withAuthenticationRequired( function Profile() {
   return (
     <div className='profile-page'>
         <div className='profile-card'>
-            <div className='profile-photo'>
-                <span className='dot'></span>
+            <div className='profile-image'>
+                  <Avatar
+                    alt = {loggedInUser.name}
+                    src = {loggedInUser.picture}
+                    sx = {{ width:120, height:120}}
+                  />
             </div>
             <div className='user-name'>
-                <div className='name'>Dhanvi Shah</div>
+                <div className='name'>{loggedInUser.name}</div>
             </div>
             <div className='profile-badges'>
               <ul className='diamond'>Diamond badges : </ul>

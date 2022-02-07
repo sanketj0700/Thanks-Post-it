@@ -24,7 +24,7 @@ function AddPost(props) {
     const [openUpload, setOpenUpload] = useState(false);
     const loggedInUser = props.loggedInUser;
     const peopleOptions = props.peopleOptions;
-    const url = 'https://thanks-post-it-backend.herokuapp.com';
+    const url = process.env.REACT_APP_ENV === 'production'? 'https://thanks-post-it-backend.herokuapp.com' : 'http://localhost:5000';
 
     const handleOnCancel = () => {
         props.setOpen(false);
@@ -32,7 +32,7 @@ function AddPost(props) {
   
     const handleOnAdd = () =>{
 
-        if(title.length > 0 && text.length > 0 && dedicated.length > 0){
+        if(title.length > 0 && title.split(' ').length <= 15 && text.length > 0 && dedicated.length > 0){
             props.setOpen(false);
             const newCard =
             {
