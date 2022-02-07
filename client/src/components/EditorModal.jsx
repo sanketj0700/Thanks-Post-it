@@ -18,7 +18,7 @@ function EditorModal({open, setOpen, title, text, badges, dedicated, image, _id,
     const [openUpload, setOpenUpload] = useState(false);
     const badgeList = ['bronze', 'silver', 'gold', 'platinum', 'diamond'];
 
-    const url = 'https://thanks-post-it-backend.herokuapp.com';
+    const url = process.env.REACT_APP_ENV === 'production'? 'https://thanks-post-it-backend.herokuapp.com' : 'http://localhost:5000';
     //temporary state for the modal before saving
     const [tempTitle, setTempTitle] = useState(title);
     const [tempText, setTempText] = useState(text);
@@ -27,7 +27,7 @@ function EditorModal({open, setOpen, title, text, badges, dedicated, image, _id,
 
 
     const handleOnSave= () => {
-        if(tempTitle.length > 0 && tempText.length > 0 && tempDedicated.length > 0){
+        if(tempTitle.length > 0 && tempTitle.split(' ').length <= 15 && tempText.length > 0 && tempDedicated.length > 0){
             setTitle(tempTitle);
             setText(tempText);
             setBadges(tempBadges);
