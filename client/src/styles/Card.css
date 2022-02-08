@@ -1,35 +1,40 @@
-.card-container{
+.card-container {
     height: fit-content;
     width: 25%;
-    background-color: #f8f8f8;
-    border-radius: 24px;
+    background-color: #8de5db;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
-    box-shadow: rgb(48, 46, 46) 0px 0px 3px;
+    box-shadow: rgb(48, 46, 46) 2px 2px 5px;
     color: rgb(48, 46, 46);
     margin: 0.5em;
     cursor: pointer;
 }
-.card-container:hover{
-    background-color: #f1f1f1;
+
+.card-container:hover {
+    /* background-color: #f1f1f1; */
+    background-color: #2fc4b2;
 }
 
 @media screen and (max-width: 1000px) {
-    .card-container{
+    .card-container {
         width: 40%;
     }
 }
-@media screen and (max-width:800px){
-    .card-container{
+
+@media screen and (max-width:800px) {
+    .card-container {
         width: 50%;
     }
 }
+
 @media screen and (max-width: 600px) {
-    .card-container{
+    .card-container {
         width: 80%;
     }
 }
-.card-header{
+
+.card-header {
     display: flex;
     margin: 1em 1em;
     margin-bottom: 6%;
@@ -37,22 +42,28 @@
     justify-content: space-between;
     align-items: center;
 }
-.active-star{
+
+.active-star {
     color: #ffc107;
     transform: scale(1.4);
 }
-.inactive-star{
-    color: #ffc107;
+
+.inactive-star {
+    color: black;
     transform: scale(1.4);
 }
-.card-title{
-    font-size: 1.4rem;
+
+.card-title {
+    word-wrap: break-word;
+    font-size: 2rem;
     font-weight: bold;
     color: #000;
     margin-right: 0.8em;
     margin-left: 0.8em;
+    max-width: 60%;
 }
-.card-body{
+
+.card-body {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -61,27 +72,33 @@
     margin-left: 1em;
     margin-right: 1em;
     height: 50%;
+    font-size: 1.2em;
+    color: #000;
 }
-.short-text{
+
+.short-text {
     display: flex;
     flex-direction: column;
     justify-content: center;
-
 }
-.read-more{
-    color: rgb(173, 17, 173);
+
+.read-more {
+    color: rgb(243, 30, 243);
     margin-top: 1em;
 }
-.read-more:hover{
-    color: rgb(243, 30, 243);
+
+.read-more:hover {
+    color: rgb(173, 17, 173);
     text-decoration: underline;
 }
-.dedicated-to{
-    font-size: 1.2em;
-    margin-top: 2em;
 
+.dedicated-to {
+    font-size: 1em;
+    margin-top: 2em;
+    font-weight: 500;
 }
-.card-footer{
+
+.card-footer {
     display: flex;
     justify-content: space-between;
     margin-left: 0.5em;
@@ -91,22 +108,25 @@
     list-style: none;
     margin-bottom: 10px;
 }
-.badges{
+
+.badges {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 20px;
     padding: 8px;
 }
-.card-footer li{
+
+.card-footer li {
     display: inline-block;
     margin-left: 0px;
     margin-right: 5px;
     margin-top: 8px;
     font-weight: 300;
-    font-size: 0.8em;
+    font-size: 1.2em;
     padding: 0 25px;
     height: 30px;
     line-height: 30px;
     border-radius: 25px;
-    background-color: silver; /*  bronze (100, 45, 23) */
+    background-color: silver;
+    /*  bronze (100, 45, 23) */
 }
