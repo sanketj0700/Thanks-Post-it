@@ -5,7 +5,6 @@ import StarredMessages from './StarredMessages';
 import Loading from './Loading';
 import Avatar from '@mui/material/Avatar';
 import { useAuth0,withAuthenticationRequired } from "@auth0/auth0-react";
-import { Avatar } from '@mui/material';
 import axios from 'axios';
 
 
@@ -17,7 +16,6 @@ export default withAuthenticationRequired( function Profile(props) {
      if(e.target.className === 'messages-1' && !section)
      {
        setSection(true)
-       
      }
      else if(e.target.className === 'messages-2' && section)
      {
@@ -48,8 +46,8 @@ export default withAuthenticationRequired( function Profile(props) {
         </div>
 
           <div className='messages-panel'>
-              <p className='messages-1' onClick={toggleSection}>Starred Messages</p>
-              <p className='messages-2' onClick={toggleSection}>Mentioned Me</p>
+              <p className='Starred-Messages' onClick={toggleSection}>Starred Messages</p>
+              <p className='Mentioned-Me' onClick={toggleSection}>Mentioned Me</p>
           </div>
 
           <div className='messages-list'>
@@ -58,7 +56,6 @@ export default withAuthenticationRequired( function Profile(props) {
             }
           </div>
       </div>
-    </>
   );
 }, {
   onRedirecting: () => (<Loading />)
