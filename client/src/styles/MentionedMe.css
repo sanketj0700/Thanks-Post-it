@@ -1,4 +1,6 @@
 .mentioned-me{
-    padding: 2em;
     color:black;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }

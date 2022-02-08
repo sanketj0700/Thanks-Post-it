@@ -8,10 +8,10 @@ import ModalTitle from './ModalTitle';
 import ImageUploadModal from './ImageUploadModal';
 import '../styles/CardModal.css';
 import '../styles/EditorModal.css';
-import Badge from './Badge';
 import PeopleSelector from './PeopleSelector';
 import MultiLineTextInput from './MultiLineTextInput';
 import axios from 'axios';
+import BadgeSelector from './BadgeSelector';
 
 function EditorModal({open, setOpen, title, text, badges, dedicated, image, _id, setTitle, setText, setBadges, setDedicated, setImage, loggedInUser, peopleOptions}) {
     const scroll = 'paper';
@@ -33,7 +33,6 @@ function EditorModal({open, setOpen, title, text, badges, dedicated, image, _id,
             setBadges(tempBadges);
             setDedicated(tempDedicated);
             setOpen(false);
-            console.log(image);
 
             // update request to server
             const config = {
@@ -54,9 +53,7 @@ function EditorModal({open, setOpen, title, text, badges, dedicated, image, _id,
             }
             axios.patch(`${url}/message/update`, 
                 body, config
-            ).then(res=>{
-                console.log(res.data);
-            });
+            );
         }
     }
     const handleOnCancel = () => {
@@ -95,11 +92,7 @@ function EditorModal({open, setOpen, title, text, badges, dedicated, image, _id,
             </DialogContentText>
             <div className='modal-badges-display'>
                 <h4 className='badges-title'>Badges</h4>
-                <ul className='badges'>
-                    {badgeList.map((badge, index)=>{
-                        return <Badge key = {index} badge = {badge} badges = {tempBadges} setBadges={setTempBadges}/>
-                    })}
-                </ul>
+                <BadgeSelector badgeList = {badgeList} badges = {tempBadges} setBadges = {setTempBadges}/>
             </div>
         </DialogContent>
         <DialogActions>

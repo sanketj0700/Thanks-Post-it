@@ -1,4 +1,3 @@
-import {useEffect} from  'react';
 import Home from './components/Home';
 import Profile from './components/Profile';
 import Navbar from './components/Navbar';

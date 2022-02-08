@@ -49,7 +49,6 @@ export default withAuthenticationRequired( function Home(props) {
         family_name: user.family_name,
       }
       axios.post(`${url}/user/`, obj, config).then(res => {
-        console.log(res.data);
         setLoggedInUser(res.data.user[0]);
         localStorage.setItem('user', JSON.stringify(res.data.user[0]));
       });

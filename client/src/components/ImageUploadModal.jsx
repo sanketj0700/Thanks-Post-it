@@ -1,18 +1,42 @@
 import {Dialog, DialogContent, DialogActions, DialogContentText, DialogTitle} from '@mui/material';
 import {useState} from 'react';
 import '../styles/CardModal.css';
-
+import axios from  'axios';
 
 function ImageUploadModal({openUpload, setOpenUpload, setImage}){
 
     const [dialogTitle, setDialogTitle] = useState('Upload Image or GIF');
     const [greaterThan2, setGreaterThan2] = useState(false);
     const [tempImg, setTempImg] = useState('');
+    const url = process.env.REACT_APP_ENV === 'production'? 'https://thanks-post-it-backend.herokuapp.com' : 'http://localhost:5000';
     const handleOnUpload = ()=>{
+        const formData = new FormData();
         if(!greaterThan2 && tempImg!==''){
         {
-            setOpenUpload(false);
-            setImage(tempImg);
+            formData.append(
+                "img", 
+                tempImg,
+                tempImg.name
+            );
+            const config = {
+                mode: 'no-cors',
+                headers: {
+                  'Authorization' : `Bearer ${localStorage.getItem('token')}`,
+                  'Access-Control-Allow-Origin': '*',
+                  'Content-Type': 'application/json',
+                }
+            }
+            axios.post(`${url}/message/uploadImg`, formData, config).then(res=>{
+                if(res.data.uploadStatus !== "successful")
+                {
+                    setDialogTitle('Image change unsuccessful');
+                }
+                else
+                {
+                    setImage(res.data.result.url);
+                    setOpenUpload(false);
+                }
+            });
             setTempImg('');
         }
     }
@@ -27,7 +51,7 @@ function ImageUploadModal({openUpload, setOpenUpload, setImage}){
         {
             setDialogTitle('Upload Image or GIF');
             setGreaterThan2(false);
-            const img = URL.createObjectURL(e.target.files[0]);
+            const img = e.target.files[0];
             setTempImg(img);
         }
     }

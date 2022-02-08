@@ -18,24 +18,8 @@
 .badges-title{
     margin-top: 2em;
 }
-.badges{
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-    padding: 8px;
-}
-.badges > li{
-    display: inline-block;
-    margin-left: 0px;
-    margin-right: 5px;
-    margin-top: 10px;
-    font-weight: 300;
-    font-size: 0.8em;
-    padding: 0 25px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 25px;
-}
+
+
 .modal-button{
     height: 40px;
     width: 60px;

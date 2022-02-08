@@ -4,7 +4,7 @@ import MentionedMe from './MentionedMe';
 import StarredMessages from './StarredMessages';
 import Loading from './Loading';
 import Avatar from '@mui/material/Avatar';
-import { useAuth0,withAuthenticationRequired } from "@auth0/auth0-react";
+import { withAuthenticationRequired } from "@auth0/auth0-react";
 
 
 export default withAuthenticationRequired( function Profile() {

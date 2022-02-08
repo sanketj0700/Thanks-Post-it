@@ -1,5 +1,6 @@
 .starred-messages{
-    padding: 2em;
     color:black;
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
