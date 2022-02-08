@@ -5,7 +5,6 @@ import StarredMessages from './StarredMessages';
 import Loading from './Loading';
 import Avatar from '@mui/material/Avatar';
 import { useAuth0,withAuthenticationRequired } from "@auth0/auth0-react";
-import { Avatar } from '@mui/material';
 import axios from 'axios';
 
 
@@ -58,7 +57,6 @@ export default withAuthenticationRequired( function Profile(props) {
             }
           </div>
       </div>
-    </>
   );
 }, {
   onRedirecting: () => (<Loading />)
