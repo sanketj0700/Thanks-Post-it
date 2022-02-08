@@ -13,7 +13,8 @@ export default withAuthenticationRequired( function Home(props) {
   const [ searchTerm, setSearchTerm ] = useState("");
   const { user, error, getIdTokenClaims } = useAuth0();
   const [peopleOptions, setPeopleOptions] = useState([]);
-  const url = 'https://thanks-post-it-backend.herokuapp.com';
+  const [loggedInUser, setLoggedInUser] = useState(user);
+  const url = process.env.REACT_APP_ENV === 'production'? 'https://thanks-post-it-backend.herokuapp.com' : 'http://localhost:5000';
   // on first load get all cards
   useEffect(() => {
     getIdTokenClaims().then((e)=>{
@@ -22,7 +23,7 @@ export default withAuthenticationRequired( function Home(props) {
       localStorage.setItem('token', e.__raw);
 
       const config = {
-        mode: 'no-cors',
+        mode: 'cors',
         headers: {
           'Authorization' : `Bearer ${localStorage.getItem('token')}`,
           'Access-Control-Allow-Origin': '*',
@@ -39,8 +40,22 @@ export default withAuthenticationRequired( function Home(props) {
         setPeopleOptions(res.data.data);
       })
 
-
+      // set user in database
+      const obj = {
+        name: user.name,
+        email: user.email,
+        picture: user.picture,
+        given_name: user.given_name,
+        family_name: user.family_name,
+      }
+      axios.post(`${url}/user/`, obj, config).then(res => {
+        console.log(res.data);
+        setLoggedInUser(res.data.user[0]);
+        localStorage.setItem('user', JSON.stringify(res.data.user[0]));
+      });
     });
+
+
   }, []);
 
 
@@ -58,6 +73,10 @@ export default withAuthenticationRequired( function Home(props) {
     return <div>Oops... {error.message}</div>;
   }
 
+  else if(user === loggedInUser){
+    return <Loading />
+  }
+
   return (
     <>
     <SearchBar  onChange={(e) => {setSearchTerm(e.target.value)}}/>
@@ -70,10 +89,10 @@ export default withAuthenticationRequired( function Home(props) {
           }
           return null;
       }).map(card => (
-        <Card key={card._id} card = {card} user = {user} peopleOptions = {peopleOptions}/>
+        <Card key={card._id} card = {card} user = {loggedInUser} peopleOptions = {peopleOptions}/>
       ))}
     </div>
-     <AddButton cards = {cards} setCards = {setCards} loggedInUser = {user} peopleOptions = {peopleOptions}/>
+     <AddButton cards = {cards} setCards = {setCards} loggedInUser = {loggedInUser} peopleOptions = {peopleOptions}/>
      </>
   );
 }, {

@@ -56,14 +56,14 @@
 .card-title {
     word-wrap: break-word;
     font-size: 2rem;
+    max-width: 60%;
     font-weight: bold;
     color: #000;
     margin-right: 0.8em;
     margin-left: 0.8em;
-    max-width: 60%;
 }
 
-.card-body {
+.card-body{
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -3,6 +3,7 @@ import '../styles/Profile.css';
 import MentionedMe from './MentionedMe';
 import StarredMessages from './StarredMessages';
 import Loading from './Loading';
+import Avatar from '@mui/material/Avatar';
 import { useAuth0,withAuthenticationRequired } from "@auth0/auth0-react";
 import { Avatar } from '@mui/material';
 import axios from 'axios';
@@ -10,10 +11,7 @@ import axios from 'axios';
 
 export default withAuthenticationRequired( function Profile(props) {
 
-  //const user = props.card.user;
-  //const loggedInUser = props.user;
-  const {user,error,getIdTokenClaims} = useAuth0();
-
+  const loggedInUser = JSON.parse(localStorage.getItem('user'));
   const [section,setSection] = useState(true);
    const toggleSection = (e)=>{
      if(e.target.className === 'messages-1' && !section)
@@ -28,27 +26,26 @@ export default withAuthenticationRequired( function Profile(props) {
    };
 
   return (
-    <>
-      <div className='profile-page'>
-          <div className='profile-card'>
-              <div className='profile-image'>
+    <div className='profile-page'>
+        <div className='profile-card'>
+            <div className='profile-image'>
                   <Avatar
-                    alt = {user.name}
-                    src = {user.picture}
-                    sx = {{ width:140, height:140 }}
+                    alt = {loggedInUser.name}
+                    src = {loggedInUser.picture}
+                    sx = {{ width:120, height:120}}
                   />
-              </div>
-              <div className='user-name'>
-                  <div className='name'>{user.name} </div>
-              </div>
-              <div className='profile-badges'>
-                <ul className='diamond'>Diamond badges : </ul>
-                <ul className='golden'>Golden badges : </ul>
-                <ul className='silver'>Silver badges : </ul>
-                <ul className='bronze'>Bronze badges : </ul>
-                <ul className='platinum'>Platinum badges : </ul>
-              </div>
-          </div>
+            </div>
+            <div className='user-name'>
+                <div className='name'>{loggedInUser.name}</div>
+            </div>
+            <div className='profile-badges'>
+              <ul className='diamond'>Diamond badges : </ul>
+              <ul className='golden'>Golden badges : </ul>
+              <ul className='silver'>Silver badges : </ul>
+              <ul className='bronze'>Bronze badges : </ul>
+              <ul className='platinum'>Platinum badges : </ul>
+            </div>
+        </div>
 
           <div className='messages-panel'>
               <p className='messages-1' onClick={toggleSection}>Starred Messages</p>

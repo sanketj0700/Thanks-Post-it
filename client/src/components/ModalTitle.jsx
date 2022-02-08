@@ -3,9 +3,13 @@ import {TextField } from '@mui/material';
 function ModalTitle({title, setTitle}) {
     const [errText, setErrText] = useState('');
     const handleTitleChange = (e) => {
-        if(e.target.value.length > 0){
+        if(e.target.value.length > 0 && e.target.value.split(' ').length <= 15) {
         setErrText('');
         setTitle(e.target.value);
+        }
+        else if(e.target.value.split(' ').length > 15) {
+            setErrText('Title must be less than 15 words');
+            setTitle(e.target.value);
         }
         else{
           setErrText('Please enter some title...');
