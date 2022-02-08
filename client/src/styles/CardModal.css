@@ -1,10 +1,9 @@
-.modal-title {
+.modal-title{
     font-size: 1.5em;
     font-weight: bold;
     color: #000;
 }
-
-.modal-image-container {
+.modal-image-container{
     width: 100%;
     height: 100%;
     display: flex;
@@ -12,66 +11,42 @@
     align-items: center;
     margin-bottom: 1em;
 }
-
-.modal-image {
+.modal-image{
     width: 50%;
     height: auto;
 }
-
-.badges-title {
+.badges-title{
     margin-top: 2em;
 }
 
-.badges {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-    padding: 8px;
-}
 
-.badges>li {
-    display: inline-block;
-    margin-left: 0px;
-    margin-right: 5px;
-    margin-top: 10px;
-    font-weight: 300;
-    font-size: 0.8em;
-    padding: 0 25px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 25px;
-}
-
-.modal-button {
+.modal-button{
     height: 40px;
     width: 60px;
     margin: 10px;
-    border: 1px solid black;
+    border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #fff;
     color: #000;
 }
-
-.modal-button:hover {
-    background-color: rgb(29, 27, 27);
-    color: white;
+.modal-button:hover{
+    background-color: rgb(240, 239, 239);
+    color: #000;
 }
-
-.author-display {
+.author-display{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    color: rgba(0, 0, 0, 0.6);
-    margin-bottom: 1em;
-    margin-top: 2em;
+    color:rgba(0, 0, 0, 0.6);
+    margin-bottom: 2em;
+    margin-top: 1em;
     font-style: italic;
 }
-
-.modal-date {
+.modal-date{
     font-size: 0.8em;
     color: rgba(0, 0, 0, 0.6);
-    margin-bottom: 2em;
-    /* margin-top: 3rem; */
+    margin-bottom: 1em;
+    margin-top: 3rem;
     font-style: italic;
 }

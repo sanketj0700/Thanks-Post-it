@@ -1,8 +1,9 @@
 .card-container {
     height: fit-content;
     width: 25%;
-    background-color: #8de5db;
-    border-radius: 15px;
+    background-color: #f8f8f8;
+    min-width: 300px;
+    border-radius: 24px;
     display: flex;
     flex-direction: column;
     box-shadow: rgb(48, 46, 46) 2px 2px 5px;
@@ -62,7 +63,6 @@
     margin-right: 0.8em;
     margin-left: 0.8em;
 }
-
 .card-body{
     display: flex;
     flex-direction: column;
@@ -115,8 +115,7 @@
     margin-bottom: 20px;
     padding: 8px;
 }
-
-.card-footer li {
+.badges > li{
     display: inline-block;
     margin-left: 0px;
     margin-right: 5px;
@@ -127,6 +126,5 @@
     height: 30px;
     line-height: 30px;
     border-radius: 25px;
-    background-color: silver;
-    /*  bronze (100, 45, 23) */
+    background-color: rgb(231, 231, 231); /*  bronze (100, 45, 23) */
 }

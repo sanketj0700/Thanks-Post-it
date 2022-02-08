@@ -9,8 +9,8 @@ import ModalTitle from './ModalTitle';
 import ImageUploadModal from './ImageUploadModal';
 import '../styles/CardModal.css';
 import '../styles/EditorModal.css';
-import Badge from './Badge'
 import PeopleSelector from './PeopleSelector';
+import BadgeSelector from './BadgeSelector';
 import axios from 'axios';
 
 function AddPost(props) {
@@ -18,7 +18,7 @@ function AddPost(props) {
     const [title, setTitle] = useState('');
     const [dedicated, setDedicated]= useState([]);
     const [badges, setBadges] = useState([]);
-    const [image, setImage] = useState('thank-you.gif');
+    const [image, setImage] = useState('');
     const scroll = 'paper';
     const badgeList = ['bronze', 'silver', 'gold', 'platinum', 'diamond'];
     const [openUpload, setOpenUpload] = useState(false);
@@ -45,7 +45,7 @@ function AddPost(props) {
             }
 
             props.setCards([newCard, ...props.cards]);
-            // send to server 
+            // send card to server
             const config = {
                 mode: 'no-cors',
                 headers: {
@@ -54,9 +54,13 @@ function AddPost(props) {
                   'Content-Type': 'application/json',
                 }
             }
-            axios.post(`${url}/message/create`, {...newCard}, config).then(res=>{
-                console.log(res.data);
-            });
+            axios.post(`${url}/message/create`, {...newCard}, config);
+            
+            // // increment badge counter for each user in dedicated 
+            // axios.post(`${url}/user/updateBadgeCount`, {dedicated: dedicated, badges: badges}, config).then(res=>{
+            //     console.log(res.data);
+            // });
+
 
             setTitle('');
             setBadges([]);
@@ -94,12 +98,7 @@ function AddPost(props) {
             </DialogContentText>
             <div className='modal-badges-display'>
                 <h4 className='badges-title'>Badges</h4>
-                <ul className='badges'>
-                    {badgeList.map((badge, index)=>{
-                        return <Badge key = {index} badge = {badge} badges={badges} setBadges={setBadges}
-                        />
-                    })}
-                </ul>
+                <BadgeSelector badgeList={badgeList} badges={badges} setBadges={setBadges}/>
             </div>
         </DialogContent>
         <DialogActions>
