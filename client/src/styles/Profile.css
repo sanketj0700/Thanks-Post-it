@@ -1,14 +1,15 @@
-.profile-page{
+.profile-page {
     display: flex;
     height: 100vh;
     width: 70%;
     margin-top: 3.5em;
-    flex-direction: column; 
+    flex-direction: column;
 }
 
-.profile-card{
+.profile-card {
     height: fit-content;
     background-color: #f8f8f8;
+    justify-content: space-between;
     border-radius: 2em;
     display: flex;
     flex-direction: row;
@@ -17,21 +18,12 @@
     width: 100%;
 }
 
-.profile-photo{
-    height: 100%;
-    width: 22%;
+.profile-image {
+    vertical-align: middle;
+    margin: auto;
 }
 
-.dot{
-    height: 60%;
-    width: 60%;
-    margin: 20%;
-    background-color: #bbb; 
-    border-radius: 50%;
-    display: inline-block;
-}
-
-.user-name{
+.user-name {
     display: flex;
     flex-direction: column;
     text-align: left;
@@ -40,13 +32,13 @@
     margin-left: 1.5em;
 }
 
-.name{
+.name {
     font-size: 2.5em;
     margin-bottom: 1.5em;
     font-weight: 500;
 }
 
-.profile-badges{
+.profile-badges {
     display: flex;
     flex-direction: column;
     margin-left: auto;
@@ -58,51 +50,53 @@
     word-wrap: break-word;
 }
 
-.diamond{
+.diamond {
     color: rgb(211, 50, 130);
     font-weight: 600;
+    padding: 0.5em;
 }
 
-.golden{
+.golden {
     color: #ffd900;
     font-weight: 600;
+    padding: 0.5em;
 }
 
-.silver{
+.silver {
     color: #c0c0c0;
     font-weight: 600;
+    padding: 0.5em;
 }
 
-.bronze{
+.bronze {
     color: #bd5e00;
     font-weight: 600;
+    padding: 0.5em;
 }
 
-.platinum{
+.platinum {
     color: #63adb3;
     font-weight: 600;
+    padding: 0.5em;
 }
 
-.messages-panel{
+.messages-panel {
     /* background-color: black; */
-    height: 6%;
+    height: fit-content;
+    width: 100%;
     margin-top: 4em;
-    padding-left: 5%;
-    padding-right: 5%; 
+    padding-bottom: 1em;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    text-align: center;
+    justify-content: space-around;
+    text-align: justify;
 }
 
-.messages-1{
+.messages-1 {
     float: left;
     color: black;
     font-size: 1.6em;
     font-weight: bold;
-    padding-top: 1%;
-    padding-left: 2em;
-    padding-right: 2em;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -110,17 +104,28 @@
     cursor: pointer;
 }
 
-.messages-2{
+.messages-1:active,
+.messages-1:focus,
+.messages-1:hover {
+    font-size: 2em;
+    font-weight: bold;
+    background-color: aqua;
+}
+
+.messages-2 {
     float: left;
     color: black;
     font-size: 1.6em;
     font-weight: bold;
-    padding-top: 1%;
-    padding-left: 2em;
-    padding-right: 2em;
     height: 100%;
     display: flex;
     flex-direction: column;
     /* background-color: cornflowerblue; */
     cursor: pointer;
+}
+
+.messages-2:hover {
+    font-size: 2em;
+    font-weight: bold;
+    background-color: #63adb3;
 }

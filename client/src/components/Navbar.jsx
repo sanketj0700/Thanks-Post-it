@@ -12,9 +12,9 @@ function Navbar() {
     return(
       <div className='navbar'>
         <Link to='/home' style={{ textDecoration: 'none' }}>
-          <h2 className='nav-brand'>
-            Thanks Post It
-          </h2>
+          <p className='nav-brand'>
+            Appreciation Wall
+          </p>
         </Link>
 
         <ul className='nav-items'>
