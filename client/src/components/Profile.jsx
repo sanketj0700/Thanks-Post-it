@@ -7,7 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 
 
-export default withAuthenticationRequired( function Profile() {
+export default withAuthenticationRequired( function Profile(props) {
 
   const loggedInUser = JSON.parse(localStorage.getItem('user'));
   const [section,setSection] = useState(true);
@@ -44,17 +44,17 @@ export default withAuthenticationRequired( function Profile() {
             </div>
         </div>
 
-        <div className='messages-panel'>
-            <p className='messages-1' onClick={toggleSection}>Starred Messages</p>
-            <p className='messages-2' onClick={toggleSection}>Mentioned Me</p>
-        </div>
+          <div className='messages-panel'>
+              <p className='Starred-Messages' onClick={toggleSection}>Starred Messages</p>
+              <p className='Mentioned-Me' onClick={toggleSection}>Mentioned Me</p>
+          </div>
 
-        <div className='messages-list'>
-          {
-            section ? <StarredMessages /> : <MentionedMe />
-          }
-        </div>
-    </div>
+          <div className='messages-list'>
+            {
+              section ? <StarredMessages /> : <MentionedMe />
+            }
+          </div>
+      </div>
   );
 }, {
   onRedirecting: () => (<Loading />)

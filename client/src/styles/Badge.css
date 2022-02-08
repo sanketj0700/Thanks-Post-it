@@ -1,37 +1,43 @@
-input[type = "checkbox"]{
+input[type="checkbox"] {
     display: none;
     width: 100%;
-
 }
+
 label {
     cursor: pointer;
 }
-#diamond{
+
+#diamond {
     background-color: rgb(211, 50, 130);
     color: #fff;
     cursor: pointer;
 }
-#platinum{
+
+#platinum {
     background-color: #63adb3;
     color: white;
     cursor: pointer;
 }
-#gold{
+
+#gold {
     background-color: #ffd900;
     cursor: pointer;
 }
-#silver{
+
+#silver {
     background-color: #c0c0c0;
     cursor: pointer;
 }
-#bronze{
+
+#bronze {
     background-color: #bd5e00;
     color: white;
     cursor: pointer;
 }
-#badge{
+
+#badge {
     background-color: rgb(255, 255, 255);
-    border: 1px solid #ccc;
+    border: 1.5px solid black;
     color: black;
 }
 
