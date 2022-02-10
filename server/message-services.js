@@ -55,6 +55,14 @@ responder.on('update',async(req,res)=>{
         const update = {
             card : req.update.card
         };
+
+        const badge = `badges.${update.card.badges}`;
+
+        const badge2 = `badges.${update.card.oldbadge}`;
+
+        for(i=0;i<message.card.dedicated.legth;i++){
+            await User.findOneAndUpdate({_id : message.card.dedicated[i].email},[{$inc :{badge : 1}},{$inc:{badge2 : -1}}]);
+        }
         const message = await Message.findOneAndUpdate({
             _id : req.update.user
             },update,{

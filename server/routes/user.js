@@ -12,6 +12,25 @@ const userServiceRequester = new cote.Requester({
 });
 
 
+router.get('/', authorizeAccessToken, async (req, res)=>{
+    try{
+        const user = await User.find({});
+        res.send({
+            error: false,
+            data: user
+        })
+        res.end();
+
+    }
+    catch(err){
+        console.log(err);
+        res.send({
+            error: true,
+            data: err.message
+        })
+    }
+});
+
 router.post('/',authorizeAccessToken,async(req,res)=>{
     try{
         const payload = JSON.parse(Buffer.from(req.headers.authorization.split(" ")[1].split('.')[1],"base64").toString());

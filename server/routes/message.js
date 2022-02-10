@@ -4,6 +4,10 @@ const User = require('../models/User');
 const {authorizeAccessToken} = require('../middleware/auth');
 const cote = require('cote');
 const { response } = require('express');
+const multer = require('multer');
+const cloudinary = require('cloudinary').v2;
+const upload = multer({ dest: 'uploads/'});
+const sendEmail = require('../middleware/sendEmail');
 
 const router = express.Router();
 
@@ -29,11 +33,24 @@ router.post('/create',authorizeAccessToken,async(req,res)=>{
         //     msg : message._id
         // });
 
+        req.body.dedicated.forEach(async(user)=>{
+            const email = user.email;
+            const subject = 'You have been thanked by ' + req.body.author.name;
+            
+            const message = '<h1>' + req.body.title + '</h1>' + '<br>' + '<img src = ' + req.body.image + ' width = \' 400px \' height = \' 300px \'>' + '</img>' + '<br>' + '<p style = \' font-size: 20px\'>' + req.body.text + '</p>';
+            const signature = '<p> Regards, </p>' + '<p> Thanks Post It Team</p>' ;
+            const html = '<p>Hello ' + user.name + '</p>' + '<p>' + req.body.author.name + ' has thanked you.</p>' + '<p>Here\'s the message: </p>' + message + signature;
+            
+            sendEmail(email, subject, html);
+        });
+
         messageServiceRequester.send({type:'create',message},(response)=>{
             return res.status(200).send({
                 error: false,
                 msg : response
-            });    
+            });  
+            
+            
         });
         
     }catch(err){
@@ -166,7 +183,7 @@ router.get('/user_id',authorizeAccessToken,async(req,res)=>{
 // @desc         Find all the starred messages of the user
 // @route        GET /message/starredMessages
 
-router.get('/starredMessages',authorizeAccessToken,async(req,res)=>{
+router.post('/starredMessages',authorizeAccessToken,async(req,res)=>{
     try{
         // await Message.find({_id : req.body.starred}).sort({_id : -1}).skip(req.body.skip).limit(10).then(data=>{
         //     res.status(200).send({
@@ -222,7 +239,7 @@ router.get('/search',authorizeAccessToken,async(req,res)=>{
 // @desc        searches for a particular query in search bar
 // @route       GET /message/dedicatedTo
 
-router.get('/dedicatedTo',authorizeAccessToken,async(req,res)=>{
+router.post('/mentioned',authorizeAccessToken,async(req,res)=>{
     try{
         // await Message.find({"card.dedicated.email" : req.body.email}).sort({_id : -1}).limit(40).skip(req.body.skip).then(data=>{
         //     res.status(200).send({
@@ -246,4 +263,18 @@ router.get('/dedicatedTo',authorizeAccessToken,async(req,res)=>{
         });
     }
 });
+
+router.post('/uploadImg', upload.single('img'), (req, res) => {
+    if (!req.file)
+        res.send({ uploadStatus: 'failed' });
+    else {
+        let file = req.file;
+        let fileName = req.file.filename;
+        console.log(req.file);
+        cloudinary.uploader.upload(file.path, {overwrite:true}, (err, result) => {
+            res.send({ uploadStatus: 'successful', result });
+        });
+    }
+});
+
 module.exports = router;
