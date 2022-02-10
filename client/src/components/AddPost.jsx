@@ -24,7 +24,7 @@ function AddPost(props) {
     const [openUpload, setOpenUpload] = useState(false);
     const loggedInUser = props.loggedInUser;
     const peopleOptions = props.peopleOptions;
-    const url = process.env.REACT_APP_ENV === 'production'? 'https://thanks-post-it-backend.herokuapp.com' : 'http://localhost:5000';
+    const url = process.env.REACT_APP_ENV === 'production'? 'https://thanks-post-it-backend.herokuapp.com' : 'http://localhost:8080';
 
     const handleOnCancel = () => {
         props.setOpen(false);

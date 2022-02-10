@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import '../styles/StarredMessages.css';
 import axios from 'axios';
 import Card from './Card';
-import '../styles/StarredMessages.css';
+
 function StarredMessages() {
   const loggedInUser = JSON.parse(localStorage.getItem('user'));
   const starredMessagesId = loggedInUser.starred;
@@ -10,7 +10,7 @@ function StarredMessages() {
   const [starredMessages, setStarredMessages] = useState([]);
   const [peopleOptions, setPeopleOptions] = useState([]);
 
-  const url = process.env.REACT_APP_ENV === 'production'? 'https://thanks-post-it-backend.herokuapp.com' : 'http://localhost:5000';
+  const url = process.env.REACT_APP_ENV === 'production'? 'https://thanks-post-it-backend.herokuapp.com' : 'http://localhost:8080';
   useEffect(() => {
 
     const body = {
@@ -27,6 +27,7 @@ function StarredMessages() {
     //get starred messages
     axios.post(`${url}/message/starredMessages`, body, config).then(res => {
       setStarredMessages(res.data.msg);
+      // console.log(res.data.msg);
     });
     // get people options
     axios.get(`${url}/user/`, config).then(res => {
@@ -36,7 +37,7 @@ function StarredMessages() {
   }, []);
 
   if(starredMessages.length === 0 || peopleOptions.length === 0) {
-    <div>No starred post!</div>
+    <p className='noStarredMsgs'>No starred post!</p>
   }
   return (
     <div className="starred-messages">

@@ -1,4 +1,4 @@
-.modal-title > input{
+.modal-title>input {
     border: none;
     background-color: transparent;
     font-size: 1.5em;
@@ -7,7 +7,8 @@
     outline: none;
     width: 100%;
 }
-.dedicated-to-input{
+
+.dedicated-to-input {
     border: none;
     background-color: transparent;
     font-size: 1.5em;
@@ -16,9 +17,11 @@
     outline: none;
     margin-top: 2em;
 }
-.note-container{
+
+.note-container {
     width: 100%;
 }
-.badge > input{
+
+.badge>input {
     display: none;
 }

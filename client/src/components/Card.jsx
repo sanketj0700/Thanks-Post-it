@@ -23,7 +23,7 @@ function Card(props) {
     const text_limit = 200;
     const user = props.card.author;
     const loggedInUser = props.user;
-    const url = process.env.REACT_APP_ENV === 'production'? 'https://thanks-post-it-backend.herokuapp.com' : 'http://localhost:5000';
+    const url = process.env.REACT_APP_ENV === 'production'? 'https://thanks-post-it-backend.herokuapp.com' : 'http://localhost:8080';
 
     const handleOnClick = () => {
         setOpen(true);

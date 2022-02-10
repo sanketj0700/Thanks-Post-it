@@ -2,12 +2,15 @@ import React, {useEffect, useState} from 'react';
 import '../styles/MentionedMe.css';
 import axios from 'axios';
 import Card from './Card';
-function MentionedMe() {
 
-  const url = process.env.REACT_APP_ENV === 'production'? 'https://thanks-post-it-backend.herokuapp.com' : 'http://localhost:5000';
-  const [mentionedCards, setMentionedCards] = useState([]);
+function MentionedMe() {
   const loggedInUser = JSON.parse(localStorage.getItem('user'));
+  // const mentionedMeId = loggedInUser.email;
+  
+  const [mentionedCards, setMentionedCards] = useState([]);
   const [peopleOptions, setPeopleOptions] = useState([]);
+
+  const url = process.env.REACT_APP_ENV === 'production'? 'https://thanks-post-it-backend.herokuapp.com' : 'http://localhost:8080';
   useEffect(()=>{
     const config = {
       mode: 'cors',
@@ -18,12 +21,12 @@ function MentionedMe() {
       }
     }
     const body = {
-      email : loggedInUser.email,
+      email: loggedInUser.email
     }
     //get all mentioned me posts
     axios.post(`${url}/message/mentioned`, body, config).then(res => {
-      console.log(res.data);
       setMentionedCards(res.data.data);
+      console.log(res.data.data);
     });
 
     // get people options

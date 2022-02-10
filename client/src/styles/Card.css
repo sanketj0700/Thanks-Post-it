@@ -3,18 +3,19 @@
     width: 25%;
     background-color: #f8f8f8;
     min-width: 300px;
-    border-radius: 24px;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
-    box-shadow: rgb(48, 46, 46) 2px 2px 5px;
+    box-shadow: rgb(48, 46, 46) 0px 0px 5px;
     color: rgb(48, 46, 46);
     margin: 0.5em;
     cursor: pointer;
+    /* box-shadow: 0px 0px 5px rgb(3, 122, 112); */
 }
 
 .card-container:hover {
     /* background-color: #f1f1f1; */
-    background-color: #2fc4b2;
+    background-color: #76eee6;
 }
 
 @media screen and (max-width: 1000px) {
@@ -31,7 +32,7 @@
 
 @media screen and (max-width: 600px) {
     .card-container {
-        width: 80%;
+        width: 40%;
     }
 }
 
@@ -56,24 +57,30 @@
 
 .card-title {
     word-wrap: break-word;
-    font-size: 2rem;
+    font-size: 1.5rem;
     max-width: 60%;
     font-weight: bold;
     color: #000;
     margin-right: 0.8em;
     margin-left: 0.8em;
 }
-.card-body{
+
+.card-body {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 94%;
+    padding: 0.5em;
     margin-bottom: 10%;
     margin-left: 1em;
     margin-right: 1em;
     height: 50%;
-    font-size: 1.2em;
+    font-size: 1.1em;
     color: #000;
+}
+
+.card-text {
+    font-size: 1em;
 }
 
 .short-text {
@@ -94,17 +101,18 @@
 
 .dedicated-to {
     font-size: 1em;
-    margin-top: 2em;
-    font-weight: 500;
+    margin-top: 3em;
+    font-weight: 400;
 }
 
 .card-footer {
     display: flex;
     justify-content: space-between;
-    margin-left: 0.5em;
+    margin-left: 1em;
     margin-right: 1em;
     align-items: center;
-    width: 100%;
+    padding: 0.5em;
+    width: 94%;
     list-style: none;
     margin-bottom: 10px;
 }
@@ -115,16 +123,19 @@
     margin-bottom: 20px;
     padding: 8px;
 }
-.badges > li{
+
+.badges>li {
     display: inline-block;
     margin-left: 0px;
     margin-right: 5px;
     margin-top: 8px;
+    margin-bottom: 8px;
     font-weight: 300;
-    font-size: 1.2em;
+    font-size: 0.9em;
     padding: 0 25px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 25px;
-    background-color: rgb(231, 231, 231); /*  bronze (100, 45, 23) */
+    height: 35px;
+    line-height: 35px;
+    border-radius: 10px;
+    background-color: rgb(231, 231, 231);
+    /*  bronze (100, 45, 23) */
 }
