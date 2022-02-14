@@ -4,6 +4,8 @@ import AddIcon from '@material-ui/icons/Add';
 import { Button } from '@mui/material';
 import '../styles/AddButton.css'
 import AddPost from './AddPost';
+import { green, red } from '@mui/material/colors';
+import { color } from '@mui/system';
 function AddButton(props){
     const [open, setOpen] = useState(false);
     const loggedInUser = props.loggedInUser;
@@ -14,7 +16,7 @@ function AddButton(props){
         <>
         <div className='AddButton'>
             <Button onClick={ handleOnClick}>
-                <Fab color="secondary" aria-label="edit">
+                <Fab style={{backgroundColor:'#18a399', color:'white'}} aria-label="add">
                     <AddIcon />
                 </Fab>
             </Button>      

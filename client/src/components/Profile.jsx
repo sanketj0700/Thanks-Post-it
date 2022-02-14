@@ -12,11 +12,11 @@ export default withAuthenticationRequired( function Profile(props) {
   const loggedInUser = JSON.parse(localStorage.getItem('user'));
   const [section,setSection] = useState(true);
    const toggleSection = (e)=>{
-     if(e.target.className === 'messages-1' && !section)
+     if(e.target.className === 'starredMsgs' && !section)
      {
        setSection(true)
      }
-     else if(e.target.className === 'messages-2' && section)
+     else if(e.target.className === 'mentionMe' && section)
      {
        setSection(false)
      }
@@ -35,18 +35,18 @@ export default withAuthenticationRequired( function Profile(props) {
             <div className='user-name'>
                 <div className='name'>{loggedInUser.name}</div>
             </div>
-            <div className='profile-badges'>
+            {/* <div className='profile-badges'>
               <ul className='diamond'>Diamond badges : </ul>
               <ul className='golden'>Golden badges : </ul>
               <ul className='silver'>Silver badges : </ul>
               <ul className='bronze'>Bronze badges : </ul>
               <ul className='platinum'>Platinum badges : </ul>
-            </div>
+            </div> */}
         </div>
 
           <div className='messages-panel'>
-              <p className='Starred-Messages' onClick={toggleSection}>Starred Messages</p>
-              <p className='Mentioned-Me' onClick={toggleSection}>Mentioned Me</p>
+              <p className='starredMsgs' onClick={toggleSection}>Starred Messages</p>
+              <p className='mentionMe' onClick={toggleSection}>Mentioned Me</p>
           </div>
 
           <div className='messages-list'>

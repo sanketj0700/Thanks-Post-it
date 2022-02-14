@@ -8,24 +8,26 @@ label {
 }
 
 #diamond {
-    background-color: rgb(211, 50, 130);
-    color: #fff;
+    /* background-color: rgb(211, 50, 130); */
+    background-color: #b9f2ff;
+    color: black;
     cursor: pointer;
 }
 
 #platinum {
-    background-color: #63adb3;
-    color: white;
+    /* background-color: #63adb3; */
+    background-color: #E8E7E3;
+    color: black;
     cursor: pointer;
 }
 
 #gold {
-    background-color: #ffd900;
+    background-color: #d4af37;
     cursor: pointer;
 }
 
 #silver {
-    background-color: #c0c0c0;
+    background-color: #C3C3C3;
     cursor: pointer;
 }
 
@@ -40,4 +42,3 @@ label {
     border: 1.5px solid black;
     color: black;
 }
-

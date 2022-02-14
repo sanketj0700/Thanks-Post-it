@@ -8,7 +8,7 @@ function ImageUploadModal({openUpload, setOpenUpload, setImage}){
     const [dialogTitle, setDialogTitle] = useState('Upload Image or GIF');
     const [greaterThan2, setGreaterThan2] = useState(false);
     const [tempImg, setTempImg] = useState('');
-    const url = process.env.REACT_APP_ENV === 'production'? 'https://thanks-post-it-backend.herokuapp.com' : 'http://localhost:5000';
+    const url = process.env.REACT_APP_ENV === 'production'? 'https://thanks-post-it-backend.herokuapp.com' : 'http://localhost:8080';
     const handleOnUpload = ()=>{
         const formData = new FormData();
         if(!greaterThan2 && tempImg!==''){

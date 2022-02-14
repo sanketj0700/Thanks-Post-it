@@ -14,7 +14,7 @@ export default withAuthenticationRequired( function Home(props) {
   const { user, error, getIdTokenClaims } = useAuth0();
   const [peopleOptions, setPeopleOptions] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState(user);
-  const url = process.env.REACT_APP_ENV === 'production'? 'https://thanks-post-it-backend.herokuapp.com' : 'http://localhost:5000';
+  const url = process.env.REACT_APP_ENV === 'production'? 'https://thanks-post-it-backend.herokuapp.com' : 'http://localhost:8080';
   // on first load get all cards
   useEffect(() => {
     getIdTokenClaims().then((e)=>{

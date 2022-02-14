@@ -1,7 +1,7 @@
 .profile-page {
     display: flex;
-    height: 100vh;
-    width: 95%;
+    height: 100%;
+    width: 100%;
     margin-top: 3.5em;
     flex-direction: column;
 }
@@ -10,31 +10,32 @@
     height: fit-content;
     background-color: #f8f8f8;
     justify-content: space-between;
+    margin: auto;
+    padding: 3em;
     border-radius: 2em;
     display: flex;
     flex-direction: row;
     box-shadow: rgb(48, 46, 46) 0px 0px 3px;
     color: rgb(48, 46, 46);
-    width: 100%;
+    width: 50%;
 }
 
 .profile-image {
-    vertical-align: middle;
-    margin: auto;
+    float: left;
+    padding: auto;
 }
 
 .user-name {
     display: flex;
     flex-direction: column;
-    text-align: left;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 1.5em;
+    float: right;
+    margin-left: 3em;
+    margin: auto;
 }
 
 .name {
     font-size: 2.5em;
-    margin-bottom: 1.5em;
+    /* margin-bottom: 1.5em; */
     font-weight: 500;
 }
 
@@ -81,7 +82,6 @@
 }
 
 .messages-panel {
-    /* background-color: black; */
     height: fit-content;
     width: 100%;
     margin-top: 4em;
@@ -92,39 +92,38 @@
     text-align: justify;
 }
 
-.messages-1 {
+.starredMsgs {
     float: left;
     color: black;
-    font-size: 1.6em;
-    font-weight: bold;
+    font-size: 1.7em;
     height: 100%;
     display: flex;
     flex-direction: column;
-    /* background-color: cornflowerblue; */
     cursor: pointer;
 }
 
-.messages-1:active,
-.messages-1:focus,
-.messages-1:hover {
+.starredMsgs:active,
+.starredMsgs:focus,
+.starredMsgs:hover {
     font-size: 2em;
     font-weight: bold;
-    background-color: aqua;
+    color: #18a399;
+    text-decoration: underline;
 }
 
-.messages-2 {
+.mentionMe {
     float: left;
     color: black;
-    font-size: 1.6em;
-    font-weight: bold;
+    font-size: 1.7em;
     height: 100%;
     display: flex;
     flex-direction: column;
-    /* background-color: cornflowerblue; */
     cursor: pointer;
 }
-.messages-2:hover {
+
+.mentionMe:hover {
     font-size: 2em;
+    color: #18a399;
     font-weight: bold;
-    background-color: #63adb3;
+    text-decoration: underline;
 }

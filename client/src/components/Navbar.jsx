@@ -11,15 +11,19 @@ function Navbar() {
   if(isAuthenticated){
     return(
       <div className='navbar'>
+        {/* <input type='checkbox' id='check'> */}
+          {/* <label for="check">
+            <i className='fas fa-bars' className='checkbtn'></i>
+          </label> */}
         <Link to='/home' style={{ textDecoration: 'none' }}>
           <p className='nav-brand'>
-            Appreciation Wall
+            Thanks Post It
           </p>
         </Link>
 
         <ul className='nav-items'>
           <li className='profile-item'>
-            <Link className='profile-link-active' to='/profile' style={{ textDecoration: 'none', color: 'black' }}>Profile</Link>
+            <Link className='profile-link-active' to='/profile' style={{ textDecoration: 'none', color: 'white' }}>Profile</Link>
           </li>
           <li onClick={() => logout({ returnTo: process.env.REACT_APP_ENV === 'production'? 'https://thanks-post-it.vercel.app/' : 'http://localhost:3000/' })} className='log-out-button'>Logout</li>
         </ul>
